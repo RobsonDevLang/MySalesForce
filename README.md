@@ -13,5 +13,5 @@ Rastreabilidade de dados: auditoria, logs, histórico de alterações e observab
 Aprendizado progressivo: começar com uma base sólida e evoluir para recursos avançados.
 Aderência ao mercado: usar stacks, padrões e práticas valorizadas em vagas reais.
 
-Objetivo do MVP inicial:
+## Objetivo do MVP inicial:
 Criar uma plataforma web onde seja possível gerenciar clientes, produtos e pedidos, simulando o fluxo básico de venda e relacionamento.
