@@ -64,3 +64,8 @@ Além disso, a ideia é futuramente reunir uma equipe, facilitando a divisão de
 ## Documentação e Testes
 - Swagger / OpenAPI
 - Postman
+
+## Princípios de design
+
+- SOLID
+- Clean Code
