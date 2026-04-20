@@ -45,6 +45,7 @@ Além disso, a ideia é futuramente reunir uma equipe, facilitando a divisão de
 
 ## Mensageria
 - RabbitMQ
+- Kafka
 
 ## Infraestrutura e DevOps
 - Docker
