@@ -10,7 +10,6 @@ function App() {
   return (
     <>
     <h1>Hello World - React + TypeScript + Vite</h1>
-
     </>
   )
 }
