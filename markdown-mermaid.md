@@ -19,7 +19,6 @@ Ou seja: se a permissão IsNegado estiver como true, a pessoa não tem acesso, m
 
 ```mermaid
 erDiagram
-erDiagram
     USUARIO {
         int Id
         string Nome
