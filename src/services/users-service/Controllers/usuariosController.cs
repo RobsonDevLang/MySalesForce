@@ -7,8 +7,8 @@ using services.Services;
 namespace mySalesForceApi.Controllers{
     
     [ApiController]
-    [Route("[controller]")]
-    public class UsuariosController : ControllerBase
+    [Route("usuarios")]
+    public class UsuariosController  : ControllerBase
     {
         // private readonly UsuarioContext _context;
         private readonly UsuarioService _service = new UsuarioService();
@@ -19,7 +19,7 @@ namespace mySalesForceApi.Controllers{
         // }
 
         [HttpGet]
-        public IActionResult SelecionarTodosUsuarios()
+        public IActionResult ExibirTodosUsuarios()
         {
             return Ok(_service.ObterTodos());
         }
