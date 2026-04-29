@@ -416,3 +416,32 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Build folders (.NET)
+**/bin/
+**/obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Test results
+TestResults/
+
+# Logs
+src/services/logs/
+logs/
+
+# Frontend
+dist/
+
+# Environment files
+.env.local
+.env.*.local
+
+# IDE / OS
+.DS_Store
+Thumbs.db
+
+*.http
