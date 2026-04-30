@@ -1,17 +1,13 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from './assets/vite.svg'
-// import heroImg from './assets/hero.png'
-import './App.css'
+import "./App.css";
+import ButtonComponent from "./components/ButtonComponent";
 
 function App() {
-  // const [count, setCount] = useState(0)
-
   return (
     <>
-    <h1>Hello World - React + TypeScript + Vite</h1>
+      <h1>Hello World - React + TypeScript + Vite</h1>
+      <ButtonComponent label="Click Me"></ButtonComponent>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
