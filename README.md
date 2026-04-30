@@ -23,7 +23,7 @@ Além disso, a ideia é futuramente reunir uma equipe, facilitando a divisão de
 # Stacks Oficiais do Projeto
 
 ## Arquitetura
-- Microserviços
+- Microsserviços
 
 ## Front-end
 - React
