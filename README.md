@@ -20,7 +20,7 @@ Aderência ao mercado: usar stacks, padrões e práticas valorizadas em vagas re
 Mesmo não sendo a opção mais simples para um projeto individual, foi a escolhida por ser muito valorizada no mercado e por permitir colocar em prática conceitos de sistemas distribuídos.
 Além disso, a ideia é futuramente reunir uma equipe, facilitando a divisão de responsabilidades, a colaboração e a troca de conhecimento.
 
-# Stack Oficial do Projeto
+# Stacks Oficiais do Projeto
 
 ## Arquitetura
 - Microserviços
@@ -45,6 +45,7 @@ Além disso, a ideia é futuramente reunir uma equipe, facilitando a divisão de
 
 ## Mensageria
 - RabbitMQ
+- Kafka
 
 ## Infraestrutura e DevOps
 - Docker
@@ -64,3 +65,8 @@ Além disso, a ideia é futuramente reunir uma equipe, facilitando a divisão de
 ## Documentação e Testes
 - Swagger / OpenAPI
 - Postman
+
+## Princípios de design
+
+- SOLID
+- Clean Code
