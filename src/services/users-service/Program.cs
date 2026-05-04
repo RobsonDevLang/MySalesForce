@@ -1,4 +1,5 @@
-using mySalesForceApi.Controllers;
+using usersService.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +8,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson();
+builder.Services.AddSingleton<IUsuarioService, UsuarioService>();
 
 var app = builder.Build();
 

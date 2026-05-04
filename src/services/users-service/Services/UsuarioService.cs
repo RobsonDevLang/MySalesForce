@@ -1,14 +1,12 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using services.Models.UsuarioModel;
+using usersService.Models;
 
-namespace services.Services
+namespace usersService.Services
 {
-    public class UsuarioService
+    public class UsuarioService : IUsuarioService
     {
-        private static List<UsuarioModel> _usuarios = new List<UsuarioModel>
+        private static readonly List<UsuarioModel> _usuarios = new()
         {
             new UsuarioModel
             {
@@ -18,27 +16,37 @@ namespace services.Services
                 TipoDocumento = "CPF",
                 NumeroDocumento = "123.456.789-00",
                 SenhaHash = "123456",
-                Status = UsuarioModel.StatusUsuario.Ativo,
+                Status = UsuarioStatus.Ativo,
                 DataCriacao = DateTime.Now,
                 GerenteId = 1,
             }
         };
 
-        public List<UsuarioModel> ObterTodos()
+        public IReadOnlyList<UsuarioModel> ObterTodos()
         {
-            return _usuarios;
+            return _usuarios.AsReadOnly();
         }
-         public UsuarioModel? ObterPorId(int id)
+
+        public UsuarioModel? ObterPorId(int id)
         {
             return _usuarios.FirstOrDefault(u => u.Id == id);
         }
 
-         public UsuarioModel Adicionar(UsuarioModel usuario)
+        public UsuarioModel Adicionar(UsuarioModel usuario)
         {
             usuario.Id = _usuarios.Any() ? _usuarios.Max(u => u.Id) + 1 : 1;
             _usuarios.Add(usuario);
 
             return usuario;
+        }
+
+        public void Atualizar(UsuarioModel usuario)
+        {
+            var index = _usuarios.FindIndex(u => u.Id == usuario.Id);
+            if (index != -1)
+            {
+                _usuarios[index] = usuario;
+            }
         }
 
     }

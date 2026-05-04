@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using usersService.Models;
 
-namespace services.DTO
+namespace usersService.DTO
 {
     public class UsuarioDto
     {
@@ -12,7 +9,7 @@ namespace services.DTO
         public string TipoDocumento { get; set; }
         public string NumeroDocumento { get; set; }
         public string SenhaHash { get; set; }
-        public int Status { get; set; }
+        public UsuarioStatus Status { get; set; }
         public int? GerenteId { get; set; }
     }
 }
