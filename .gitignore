@@ -445,3 +445,5 @@ dist/
 Thumbs.db
 
 *.http
+
+.fake
