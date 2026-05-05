@@ -98,6 +98,18 @@ StyleCopReport.xml
 # but not Directory.Build.rsp, as it configures directory-level build defaults
 !Directory.Build.rsp
 *.sbr
+
+# Node.js / Frontend
+node_modules/
+dist/
+dist-ssr/
+*.local
+.cache/
+.vite/
+
+# Outros temporários
+*.tmp
+*.temp
 *.tlb
 *.tli
 *.tlh

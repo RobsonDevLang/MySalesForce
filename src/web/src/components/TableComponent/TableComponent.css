@@ -1,0 +1,34 @@
+.custom-table {
+  margin: 10px;
+
+  background-color: #ddd6ff;
+  border-spacing: 0;
+}
+.custom-table th {
+  border: 1px solid #2a48df;
+  background-color: #b2a3fc;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.custom-table td {
+  border: 1px solid #2a48df;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.custom-table th:first-child {
+  border-radius: 5px 0 0 0px;
+}
+
+.custom-table th:last-child {
+  border-radius: 0 5px 0 0px;
+}
+
+.custom-table tr:last-child td:first-child {
+  border-radius: 0 0 0 5px;
+}
+
+.custom-table tr:last-child td:last-child {
+  border-radius: 0 0 5px 0;
+}
