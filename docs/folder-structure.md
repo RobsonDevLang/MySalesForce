@@ -1,15 +1,15 @@
 ## Estrutura de Pastas
-
+```
 MySalesForce/
 ├─ src/ # código-fonte da aplicação
 │ ├─ web/ # front-end (React + Vite)
 │ └─ services/ # microsserviços (APIs .NET)
-│ ├─ users-service/
+│ ├─ [nome]-service/
 │ └─ run-all.ps1 # script para iniciar todos os serviços
 ├─ docs/ # documentação do projeto
 ├─ infra/ # configurações de infraestrutura (Docker, K8s, pipelines)
 └─ shared/ # código, contratos e utilitários compartilhados entre serviços
-
+```
 ## Propósito de Cada Pasta
 
 ### `src/`
