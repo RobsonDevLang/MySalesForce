@@ -1,0 +1,13 @@
+.custom-input {
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 1px solid #2a48df;
+  outline: none;
+  margin: 10px;
+  width: 200px;
+  box-sizing: border-box;
+}
+
+.custom-input:hover {
+  border: 1px solid #bdb2ff;
+}

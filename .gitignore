@@ -98,6 +98,18 @@ StyleCopReport.xml
 # but not Directory.Build.rsp, as it configures directory-level build defaults
 !Directory.Build.rsp
 *.sbr
+
+# Node.js / Frontend
+node_modules/
+dist/
+dist-ssr/
+*.local
+.cache/
+.vite/
+
+# Outros temporários
+*.tmp
+*.temp
 *.tlb
 *.tli
 *.tlh
@@ -416,3 +428,34 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Build folders (.NET)
+**/bin/
+**/obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Test results
+TestResults/
+
+# Logs
+src/services/logs/
+logs/
+
+# Frontend
+dist/
+
+# Environment files
+.env.local
+.env.*.local
+
+# IDE / OS
+.DS_Store
+Thumbs.db
+
+*.http
+
+.fake

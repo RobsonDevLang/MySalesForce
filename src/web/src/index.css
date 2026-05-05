@@ -1,0 +1,32 @@
+body {
+  background-image: url("./assets/background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  /* height: 100vh; */
+  font-family: "Inter", sans-serif;
+  font-weight: 700; /* Bold */
+  letter-spacing: -0.02em; /* Para dar o efeito de logo */
+}
+
+.logo-style {
+  width: 250px;
+  margin-top: 10px;
+  margin-left: -5px;
+}
+
+hr {
+  margin: 0;
+  height: 0.5px;
+  background-color: #2a48df;
+  border: none;
+  border-top: none;
+}
+
+.custom-h3 {
+  margin: 10px;
+  color: #2a48df;
+}

@@ -1,0 +1,22 @@
+.custom-select {
+  padding: 0;
+  border-radius: 5px;
+  border: 1px solid #2a48df;
+  box-shadow: none;
+  box-sizing: border-box;
+  outline: none;
+  margin: 10px;
+  width: 200px;
+}
+
+.custom-select {
+  width: 200px;
+}
+
+.custom-select > div {
+  width: 100%;
+}
+
+.custom-select * {
+  box-sizing: border-box;
+}
