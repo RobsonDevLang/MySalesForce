@@ -1,23 +1,19 @@
 import { useState, type SetStateAction } from "react";
 import "./App.css";
 import ButtonComponent from "./components/ButtonComponent/ButtonComponent";
-import InputComponent from "./components/InputComponent/InputComponent";
 import SelectComponent from "./components/SelectComponent/SelectComponent";
-import logo from "./assets/logo.png";
 import TableComponent from "./components/TableComponent/TableComponent";
+import HeaderComponent from "./components/HeaderComponent/HeaderComponent";
 
 function App() {
   const [selectedOption, setSelectedOption] = useState("option1");
 
   return (
     <>
-      <div>
-        <img src={logo} alt="Logo MySalesForce" className="logo-style" />
-      </div>
+      <HeaderComponent />
       <hr />
       <h3 className="custom-h3">Primeiros components em React</h3>
       <ButtonComponent label="Clique aqui"></ButtonComponent> <br />
-      <InputComponent placeholder="Pesquisar: Ex.: Roupa..."></InputComponent>
       <SelectComponent
         label=""
         value={selectedOption}
