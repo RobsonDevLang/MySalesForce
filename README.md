@@ -29,8 +29,9 @@ Além disso, a ideia é futuramente reunir uma equipe, facilitando a divisão de
 - React
 - TypeScript
 - Vite
-- MUI
+- MUI (Material UI)
 - React Router
+- Hooks
 - TanStack Query
 
 ## Back-end
