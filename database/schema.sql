@@ -1,58 +1,80 @@
+DROP TABLE IF EXISTS usuario_permissao CASCADE;
+DROP TABLE IF EXISTS permissao CASCADE;
+DROP TABLE IF EXISTS usuario CASCADE;
+DROP TABLE IF EXISTS departamento CASCADE;
+DROP TABLE IF EXISTS cargo CASCADE;
 
-drop table if EXISTS user_permissoes cascade;
-drop table if EXISTS permissoes cascade;
-drop table if EXISTS usuarios cascade;
-drop table if EXISTS departamentos cascade;
-drop table if EXISTS cargos cascade;
 
-
-create table cargos (
-	id SERIAL primary key,
-	nome VARCHAR(100)
+create table cargo (
+	id INT GENERATED ALWAYS AS IDENTITY,
+	nome VARCHAR(255) not NULL,
+	constraint pk_cargo primary key (id)
 );
 
-create table departamentos (
-	id SERIAL primary key,
-	nome VARCHAR(100)
+create table departamento (
+	id INT GENERATED ALWAYS AS IDENTITY,
+	nome VARCHAR(255) not NULL,
+	constraint pk_departamento primary key (id)
 );
 
-create table usuarios (
-	id SERIAL primary key,
-	nome VARCHAR(100) not NULL,
-	email VARCHAR(100)not NULL,
-	senha_hash VARCHAR(100) not NULL,
+create table usuario (
+	id INT GENERATED ALWAYS AS IDENTITY,
+	nome VARCHAR(255) not NULL,
+	sobrenome VARCHAR(255) not NULL,
+	email VARCHAR(255) not NULL,
+	senha_hash VARCHAR(255) not NULL,
 	gerente_id INT,
 	cargo_id INT,
 	departamento_id INT,
+	`status` INT not null default 1,
+	
+	data_criacao TIMESTAMP not null default CURRENT_TIMESTAMP,
+	
+	constraint pk_usuario primary key (id),
 	
 	constraint uq_usuario_email unique (email),
 	
 	constraint fk_usuario_gerente
-	FOREIGN key (gerente_id) references usuarios(id),
+	FOREIGN key (gerente_id) references usuario(id),
 	
 	constraint fk_usuario_cargo
-	FOREIGN key (cargo_id) references cargos(id),
+	FOREIGN key (cargo_id) references cargo(id),
 	
 	constraint fk_usuario_departamento
-	FOREIGN key (departamento_id) references departamentos(id)
+	FOREIGN key (departamento_id) references departamento(id)
 	
-
 );
 
-create table permissoes (
-	id SERIAL primary key,
-	nome VARCHAR(100)
-
+create table permissao (
+	id INT GENERATED ALWAYS AS IDENTITY,
+	nome VARCHAR(255) not NULL,
+	constraint pk_permissao primary key (id)
 );
 
-create table user_permissoes (
-	permissao_id INT,
-	user_id INT,
-	primary KEY(permissao_id, user_id),
+create table usuario_permissao (
+	permissao_id INT not null,
+	usuario_id INT not null,
+	constraint pk_usuario_permissao
+	primary key (permissao_id, usuario_id),
 	
 	constraint fk_permissao
-	FOREIGN KEY(permissao_id) references permissoes(id),
+	FOREIGN KEY(permissao_id) references permissao(id),
 	
-	constraint fk_user
-	FOREIGN KEY(user_id) references usuarios(id)
+	constraint fk_usuario
+	FOREIGN KEY(usuario_id) references usuario(id)
 );
+
+create index idx_usuario_gerente_id
+	on usuario(gerente_id);
+
+create index idx_usuario_cargo_id
+	on usuario(cargo_id);
+
+create index idx_usuario_departamento_id
+	on usuario(departamento_id);
+
+create index idx_usuario_permissao_permissao_id
+	on usuario_permissao(permissao_id);
+
+create index idx_usuario_permissao_usuario_id
+	on usuario_permissao(usuario_id);

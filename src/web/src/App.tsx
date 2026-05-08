@@ -4,6 +4,7 @@ import ButtonComponent from "./components/ButtonComponent/ButtonComponent";
 import SelectComponent from "./components/SelectComponent/SelectComponent";
 import TableComponent from "./components/TableComponent/TableComponent";
 import HeaderComponent from "./components/HeaderComponent/HeaderComponent";
+import CategoriasComponent from "./components/CategoriasComponent/CategoriasComponent";
 
 function App() {
   const [selectedOption, setSelectedOption] = useState("option1");
@@ -12,6 +13,7 @@ function App() {
     <>
       <HeaderComponent />
       <hr />
+      <CategoriasComponent></CategoriasComponent>
       <h3 className="custom-h3">Primeiros components em React</h3>
       <ButtonComponent label="Clique aqui"></ButtonComponent> <br />
       <SelectComponent

@@ -11,14 +11,15 @@ namespace usersService.Services
             new UsuarioModel
             {
                 Id = 1,
-                Nome = "John Doe",
+                Nome = "John",
+                Sobrenome = "Doe",
                 Email = "john.doe@example.com",
-                TipoDocumento = "CPF",
-                NumeroDocumento = "123.456.789-00",
                 SenhaHash = "123456",
-                Status = UsuarioStatus.Ativo,
-                DataCriacao = DateTime.Now,
-                GerenteId = 1,
+                Status = 1,
+                DataCriacao = DateTime.UtcNow,
+                GerenteId = null,
+                CargoId = 1,
+                DepartamentoId = 1
             }
         };
 
@@ -34,7 +35,6 @@ namespace usersService.Services
 
         public UsuarioModel Adicionar(UsuarioModel usuario)
         {
-            usuario.Id = _usuarios.Any() ? _usuarios.Max(u => u.Id) + 1 : 1;
             _usuarios.Add(usuario);
 
             return usuario;
