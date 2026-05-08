@@ -6,6 +6,8 @@ using usersService.Services;
 using usersService.Validators;
 using System.Net.Mail;
 using Microsoft.AspNetCore.JsonPatch;
+using usersService.Data;
+using System.Data.Common;
 
 namespace usersService.Controllers;
 
@@ -14,10 +16,12 @@ namespace usersService.Controllers;
 public class UsuariosController : ControllerBase
 {
     private readonly IUsuarioService _service;
+    private readonly ApplicationDbContext _context;
 
-    public UsuariosController(IUsuarioService service)
+    public UsuariosController(IUsuarioService service, ApplicationDbContext context)
     {
         _service = service;
+        _context = context;
     }
 
     [HttpGet]
@@ -39,10 +43,13 @@ public class UsuariosController : ControllerBase
     [HttpPost]
     public IActionResult Create(UsuarioDto dto)
     {
-        var usuario = UsuarioMapper.ParaModel(dto);
-        var usuarioCriado = _service.Adicionar(usuario);
+        var usuarioMapeado = UsuarioMapper.ParaModel(dto);
+        var usuarioCriado = _service.Adicionar(usuarioMapeado);
 
-        return CreatedAtAction(nameof(GetById), new { id = usuarioCriado.Id }, usuarioCriado);
+        _context.usuario.Add(usuarioCriado);
+        _context.SaveChanges();
+
+        return Ok("Criado com sucesso");
     }
 
     [HttpPut("{id}")]
@@ -77,6 +84,18 @@ public class UsuariosController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpPost("test")]
+    public IActionResult test()
+    {
+        var novoTeste = new Test { Teste = "1" };
+        _context.Teste.Add(novoTeste);
+        _context.SaveChanges();
+
+        return Ok("1");
+    }
+
+
 }
 
 
