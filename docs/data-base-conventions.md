@@ -13,10 +13,13 @@
 ## Chave Primária
 
 - id ou quando necessário: `id_`[nome do campo]
+- utilizar sempre chaves primarias nomeadas
+- utilizar o "INT GENERATED ALWAYS AS IDENTITY" em vez do "SERIAL"
 
 ## Chaves Estrangeiras
 
 - Nome igual ao da PK referenciada
+- Relacionamento N:N as chaves devem ser NOT NULL nas FKs da tabela de relacionamento
 
 ## Datas
 
@@ -24,7 +27,7 @@
 
 ## Status
 
-- utilizar o nome padrão: ativo
+- utilizar o nome padrão: status
 
 ## Índices
 
@@ -52,7 +55,7 @@
 ## Valores Monetários
 
 - Utilizar DECIMAL(10,2)
-- Nomear colunas com prefixo valor_ ou nome descritivo, exemplos: valor_desconto e preco
+- Nomear colunas com prefixo valor\_ ou nome descritivo, exemplos: valor_desconto e preco
 
 ## Boas Práticas
 
@@ -78,5 +81,5 @@
 
 - Utilizar nome composto pelas tabelas relacionadas
 - Exemplo:
-    usuario_permissao
-    produto_categoria
+  usuario_permissao
+  produto_categoria
