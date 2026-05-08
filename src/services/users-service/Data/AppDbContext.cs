@@ -8,6 +8,5 @@ namespace usersService.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         public DbSet<UsuarioModel> usuario { get; set; }
-        public DbSet<Test> Teste { get; set; }
     }
 }

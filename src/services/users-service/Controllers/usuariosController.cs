@@ -85,17 +85,6 @@ public class UsuariosController : ControllerBase
         return NoContent();
     }
 
-    [HttpPost("test")]
-    public IActionResult test()
-    {
-        var novoTeste = new Test { Teste = "1" };
-        _context.Teste.Add(novoTeste);
-        _context.SaveChanges();
-
-        return Ok("1");
-    }
-
-
 }
 
 
