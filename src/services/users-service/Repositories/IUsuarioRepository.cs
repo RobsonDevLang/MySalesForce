@@ -1,8 +1,8 @@
 using usersService.Models;
 
-namespace usersService.Services
+namespace usersService.Repositories
 {
-    public interface IUsuarioService
+    public interface IUsuarioRepository
     {
         IReadOnlyList<UsuarioModel> ObterTodos();
         UsuarioModel? ObterPorId(int id);
