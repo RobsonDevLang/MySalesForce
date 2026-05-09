@@ -11,7 +11,6 @@ using System.Data.Common;
 
 namespace usersService.Controllers;
 
-// Controllers/UsuariosController.cs
 [ApiController]
 [Route("usuarios")]
 public class UsuariosController : ControllerBase
