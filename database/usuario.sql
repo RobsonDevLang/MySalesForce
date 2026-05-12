@@ -26,7 +26,7 @@ create table usuario (
 	gerente_id INT,
 	cargo_id INT,
 	departamento_id INT,
-	`status` INT not null default 1,
+	status INT not null default 1,
 	
 	data_criacao TIMESTAMP not null default CURRENT_TIMESTAMP,
 	

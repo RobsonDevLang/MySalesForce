@@ -8,9 +8,9 @@ public class UsuarioModel
     {
 
     public int Id { get; set; }
-    public string Nome { get; set; }
-    public string Sobrenome { get; set; }
-    private string _email;
+    public string Nome { get; set; } = string.Empty;
+    public string Sobrenome { get; set; } = string.Empty;
+    private string _email = string.Empty;
         public string Email
         {
             get => _email;
@@ -23,12 +23,16 @@ public class UsuarioModel
             }
         }
     
-    public string SenhaHash { get; set; }
+    public string SenhaHash { get; set; } = string.Empty;
     public int  Status { get; set; } = 1;
-    public DateTime DataCriacao { get; set; }
+    public DateTime DataCriacao { get; set; } = DateTime.UtcNow;
     public int? GerenteId { get; set; }
     public int? CargoId { get; set; }
     public int? DepartamentoId { get; set; }
+
+    // public UsuarioModel? Gerente { get; set; }
+    // public CargoModel? Cargo { get; set; }
+    // public DepartamentoModel? Departamento { get; set; }
 
     }
 }

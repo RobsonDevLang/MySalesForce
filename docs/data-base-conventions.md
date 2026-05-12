@@ -18,7 +18,7 @@
 
 ## Chaves Estrangeiras
 
-- Nome igual ao da PK referenciada
+- Nome igual ao da PK referenciada, como o exemplo a seguir: `[nome_tabela_referenciada]_id`
 - Relacionamento N:N as chaves devem ser NOT NULL nas FKs da tabela de relacionamento
 
 ## Datas
