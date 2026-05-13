@@ -27,7 +27,7 @@ function App() {
         onChange={(value: SetStateAction<string>) => setSelectedOption(value)}
       />
       <TableComponent
-        headers={["Nome", "Email", "Telefone"]}
+        headers={["Name", "Email", "Telefone"]}
         data={[
           ["John Doe", "john@example.com", "(123) 456-7890"],
           ["Jane Smith", "jane@example.com", "(098) 765-4321"],

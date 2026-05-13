@@ -13,26 +13,26 @@ DROP TABLE IF EXISTS condicao;
 CREATE TABLE condicao(
 	id INT GENERATED ALWAYS AS IDENTITY,
 	constraint pk_condicao primary key (id),
-	nome VARCHAR(255) not NULL
+	name VARCHAR(255) not NULL
 );
 
 CREATE TABLE categoria(
 	id INT GENERATED ALWAYS AS IDENTITY,
 	constraint pk_categoria primary key (id),
-	nome VARCHAR(255) not NULL
+	name VARCHAR(255) not NULL
 );
 
 CREATE TABLE marca(
 	id INT GENERATED ALWAYS AS IDENTITY,
 	constraint pk_marca primary key (id),
-	nome VARCHAR(255) not NULL
+	name VARCHAR(255) not NULL
 );
 
 CREATE TABLE produto (
 	id INT GENERATED ALWAYS AS IDENTITY,
 	constraint pk_produto primary key (id),
 	codigo VARCHAR(255) not NULL,
-	nome VARCHAR(255) not NULL,
+	name VARCHAR(255) not NULL,
 	descricao TEXT not NULL,
 	status INT not null default 0,
 	peso DECIMAL(10, 2) not null default 0.00,
@@ -73,7 +73,7 @@ CREATE TABLE produto_imagem(
 CREATE TABLE movimentacao(
 	id INT GENERATED ALWAYS AS IDENTITY,
 	constraint pk_movimentacao primary key (id),
-	nome VARCHAR(255) not NULL
+	name VARCHAR(255) not NULL
 );
 
 CREATE INDEX idx_produto_imagem_produto_id ON produto_imagem(produto_id);

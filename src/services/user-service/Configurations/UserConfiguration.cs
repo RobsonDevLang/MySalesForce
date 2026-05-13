@@ -4,18 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using usersService.Models;
+using UserService.Models;
 
-namespace usersService.Configurations
+namespace UserService.Configurations
 {
-    public class UsuarioConfiguration : IEntityTypeConfiguration<UsuarioModel>
+    public class UserConfiguration : IEntityTypeConfiguration<UserModel>
     {
-        public void Configure(EntityTypeBuilder<UsuarioModel> builder)
+        public void Configure(EntityTypeBuilder<UserModel> builder)
         {
             builder.HasIndex(x => x.Email)
                 .IsUnique();
 
-            builder.Property(x => x.DataCriacao)
+            builder.Property(x => x.CreateDate)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP");
         }
         

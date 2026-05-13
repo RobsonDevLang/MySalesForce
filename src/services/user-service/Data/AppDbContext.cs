@@ -1,14 +1,14 @@
 using Microsoft.EntityFrameworkCore;
-using usersService.Configurations;
-using usersService.Models;
-using usersService.Services;
+using UserService.Configurations;
+using UserService.Models;
+using UserService.Services;
 
-namespace usersService.Data
+namespace UserService.Data
 {
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-        public DbSet<UsuarioModel> Usuario  { get; set; }
+        public DbSet<UserModel> AppUser  { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Users.Api.Migrations
+namespace UserService.Api.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -13,29 +13,29 @@ namespace Users.Api.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "usuario",
+                name: "app_user",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    nome = table.Column<string>(type: "text", nullable: false),
-                    sobrenome = table.Column<string>(type: "text", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: false),
+                    surname = table.Column<string>(type: "text", nullable: false),
                     email = table.Column<string>(type: "text", nullable: false),
-                    senha_hash = table.Column<string>(type: "text", nullable: false),
+                    password_hash = table.Column<string>(type: "text", nullable: false),
                     status = table.Column<int>(type: "integer", nullable: false),
-                    data_criacao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
-                    gerente_id = table.Column<int>(type: "integer", nullable: true),
-                    cargo_id = table.Column<int>(type: "integer", nullable: true),
-                    departamento_id = table.Column<int>(type: "integer", nullable: true)
+                    create_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
+                    manager_id = table.Column<int>(type: "integer", nullable: true),
+                    position_id = table.Column<int>(type: "integer", nullable: true),
+                    department_id = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_usuario", x => x.id);
+                    table.PrimaryKey("pk_app_user", x => x.id);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "ix_usuario_email",
-                table: "usuario",
+                name: "ix_app_user_email",
+                table: "app_user",
                 column: "email",
                 unique: true);
         }
@@ -44,7 +44,7 @@ namespace Users.Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "usuario");
+                name: "app_user");
         }
     }
 }
