@@ -2,18 +2,21 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using usersService.Data;
+using UserService.Data;
 
 #nullable disable
 
-namespace Users.Api.Migrations
+namespace UserService.Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260513185243_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace Users.Api.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("usersService.Models.UsuarioModel", b =>
+            modelBuilder.Entity("UserService.Models.UserModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -31,56 +34,56 @@ namespace Users.Api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CargoId")
-                        .HasColumnType("integer")
-                        .HasColumnName("cargo_id");
-
-                    b.Property<DateTime>("DataCriacao")
+                    b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("data_criacao")
+                        .HasColumnName("create_date")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                    b.Property<int?>("DepartamentoId")
+                    b.Property<int?>("DepartmentId")
                         .HasColumnType("integer")
-                        .HasColumnName("departamento_id");
+                        .HasColumnName("department_id");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("email");
 
-                    b.Property<int?>("GerenteId")
+                    b.Property<int?>("ManagerId")
                         .HasColumnType("integer")
-                        .HasColumnName("gerente_id");
+                        .HasColumnName("manager_id");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("nome");
+                        .HasColumnName("name");
 
-                    b.Property<string>("SenhaHash")
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("senha_hash");
+                        .HasColumnName("password_hash");
 
-                    b.Property<string>("Sobrenome")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("sobrenome");
+                    b.Property<int?>("PositionId")
+                        .HasColumnType("integer")
+                        .HasColumnName("position_id");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer")
                         .HasColumnName("status");
 
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("surname");
+
                     b.HasKey("Id")
-                        .HasName("pk_usuario");
+                        .HasName("pk_app_user");
 
                     b.HasIndex("Email")
                         .IsUnique()
-                        .HasDatabaseName("ix_usuario_email");
+                        .HasDatabaseName("ix_app_user_email");
 
-                    b.ToTable("usuario", (string)null);
+                    b.ToTable("app_user", (string)null);
                 });
 #pragma warning restore 612, 618
         }

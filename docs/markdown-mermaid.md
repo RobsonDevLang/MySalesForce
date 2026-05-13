@@ -6,7 +6,7 @@ Responsável por autenticação, autorização e controle de acesso dos usuário
 
 ## Entidades principais
 
-- Usuario
+- AppUser
 - Departamento
 - Permissao
 
@@ -21,24 +21,24 @@ Ou seja: se a permissão IsNegado estiver como true, a pessoa não tem acesso, m
 erDiagram
     USUARIO {
         int Id
-        string Nome
+        string Name
         string Email
-        string SenhaHash
+        string PasswordHash
         string Status
-        datetime DataCriacao
-        int GerenteId
+        datetime CreateDate
+        int ManagerId
     }
 
     PERMISSAO {
         int Id
-        string Nome
+        string Name
         string Codigo
         string Descricao
     }
 
     DEPARTAMENTO {
         int Id
-        string Nome
+        string Name
         string Descricao
     }
 
@@ -49,13 +49,13 @@ erDiagram
     }
 
     DEPARTAMENTO_PERMISSAO {
-        int DepartamentoId
+        int DepartmentId
         int PermissaoId
     }
 
     USUARIO_DEPARTAMENTO {
         int UsuarioId
-        int DepartamentoId
+        int DepartmentId
     }
 
     USUARIO ||--o{ USUARIO
@@ -67,3 +67,4 @@ erDiagram
 
     USUARIO ||--o{ USUARIO_DEPARTAMENTO
     DEPARTAMENTO ||--o{ USUARIO_DEPARTAMENTO
+```

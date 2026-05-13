@@ -1,15 +1,17 @@
 ## Estrutura de Pastas
+
 ```
 MySalesForce/
 ├─ src/ # código-fonte da aplicação
 │ ├─ web/ # front-end (React + Vite)
 │ └─ services/ # microsserviços (APIs .NET)
-│ ├─ [nome]-service/
+│ ├─ [name]-service/
 │ └─ run-all.ps1 # script para iniciar todos os serviços
 ├─ docs/ # documentação do projeto
 ├─ infra/ # configurações de infraestrutura (Docker, K8s, pipelines)
 └─ shared/ # código, contratos e utilitários compartilhados entre serviços
 ```
+
 ## Propósito de Cada Pasta
 
 ### `src/`
@@ -31,13 +33,13 @@ Microsserviços da aplicação. Cada serviço é uma API independente.
 Cada microsserviço segue o padrão:
 
 ```
-[nome]-service/
+[name]-service/
 ├── Controllers/      # endpoints da API (recebe requisições HTTP)
 ├── DTO/              # Data Transfer Objects (representa dados de entrada/saída)
 ├── Mappers/          # conversões entre DTO e Model
 ├── Models/           # entidades de domínio com validações
 ├── Services/         # lógica de negócio
-└── [Nome].Api.csproj # projeto .NET
+└── [Name].Api.csproj # projeto .NET
 ```
 
 ### `docs/`
@@ -73,5 +75,5 @@ Código compartilhado entre serviços:
 - Não misturar front-end com back-end fora de suas pastas
 - Não misturar infraestrutura com código de negócio
 - Tudo que for compartilhado entre projetos deve ir para `shared/`
-- Novos microsserviços devem seguir o mesmo padrão de nomenclatura (`[nome]-service/`)
+- Novos microsserviços devem seguir o mesmo padrão de nomenclatura (`[name]-service/`)
 - Cada microsserviço deve seguir a estrutura interna (Controllers, DTOs, Mappers, Models, Services)
