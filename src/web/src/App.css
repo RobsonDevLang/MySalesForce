@@ -1,26 +1,2 @@
-.custom-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #f8f9ff;
-}
 
-.menu {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
 
-.menu-item {
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-  padding: 5px 10px;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-}
-
-.menu-item:hover {
-  background-color: #bdb2ff;
-}

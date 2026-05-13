@@ -9,7 +9,7 @@ Este documento explica como o serviço de usuários foi estruturado e o motivo d
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                        HTTP Request                              │
-│                    (usuariosController)                          │
+│                    (UsuariosController)                          │
 └─────────────────────────────────────────────────────────────────┘
                                 │
                                 ▼
@@ -19,6 +19,7 @@ Este documento explica como o serviço de usuários foi estruturado e o motivo d
 │  - Recebe as requisições HTTP                                    │
 │  - Valida parâmetros básicos                                     │
 │  - Delega para o Service                                         │
+│  - Retorna respostas HTTP apropriadas                            │
 └─────────────────────────────────────────────────────────────────┘
                                 │
                                 ▼
@@ -27,15 +28,24 @@ Este documento explica como o serviço de usuários foi estruturado e o motivo d
 │                    (UsuarioService.cs)                           │
 │  - Lógica de negócio                                             │
 │  - Validações de domínio                                         │
-│  - Manipulação de dados                                          │
+│  - Orquestra chamadas ao Repository                              │
 └─────────────────────────────────────────────────────────────────┘
                                 │
                                 ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                      Model Layer                                 │
-│                  (UsuarioModel.cs)                               │
-│  - Entidade de domínio                                           │
-│  - Validações de negócio (CPF, CNPJ, Email)                      │
+│                    Repository Layer                              │
+│                  (UsuarioRepository.cs)                          │
+│  - Abstração do acesso a dados                                   │
+│  - Operações CRUD via Entity Framework                           │
+│  - Isolamento do DbContext                                       │
+└─────────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                      Data Layer                                  │
+│                  (ApplicationDbContext.cs)                       │
+│  - Mapeamento ORM com Entity Framework                           │
+│  - Comunicação com o banco de dados                              │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -43,7 +53,7 @@ Este documento explica como o serviço de usuários foi estruturado e o motivo d
 
 ## Componentes e Suas Responsabilidades
 
-### 1. Controller (`usuariosController.cs`)
+### 1. Controller (`UsuariosController.cs`)
 
 **Responsabilidade:** Expor os endpoints da API e receber as requisições HTTP.
 
@@ -51,37 +61,42 @@ Este documento explica como o serviço de usuários foi estruturado e o motivo d
 
 - Segue o padrão RESTful com rotas claras (`/usuarios`)
 - Utiliza `IActionResult` para retornar códigos HTTP apropriados
+- Não possui acesso direto ao `DbContext` — delega tudo ao Service
 - Separação clara entre "o que" (endpoint) e "como" (lógica)
 
 **Métodos implementados:**
-| Método | Endpoint | Descrição |
-|--------|----------|-----------|
-| `GET /usuarios` | `ExibirTodosUsuarios()` | Lista todos os usuários |
-| `GET /usuarios/{id}` | `SelecionarUsuario(id)` | Retorna um usuário específico |
-| `POST /usuarios` | `AdicionarUsuario(dto)` | Cria um novo usuário |
+
+| Método HTTP | Endpoint         | Método do Controller  | Descrição                        |
+| ----------- | ---------------- | --------------------- | -------------------------------- |
+| `GET`       | `/usuarios`      | `GetAll()`            | Lista todos os usuários          |
+| `GET`       | `/usuarios/{id}` | `GetById(id)`         | Retorna um usuário específico    |
+| `POST`      | `/usuarios`      | `Create(dto)`         | Cria um novo usuário             |
+| `PUT`       | `/usuarios/{id}` | `Update(id, dto)`     | Atualiza um usuário completo     |
+| `PATCH`     | `/usuarios/{id}` | `Patch(id, patchDoc)` | Atualiza parcialmente um usuário |
 
 ---
 
 ### 2. DTO (`UsuarioDto.cs`)
 
-**Responsabilidade:** Representar os dados que entram/saem da API.
+**Responsabilidade:** Representar os dados que entram e saem da API.
 
 **Por que foi feito assim:**
 
 - Separa a estrutura de dados da API do modelo de domínio
 - Permite evolução independente do modelo interno
-- Evita expor propriedades internas desnecessárias
+- Evita expor propriedades internas desnecessárias (ex: `DataCriacao`)
 
 ```csharp
 public class UsuarioDto
 {
     public string Nome { get; set; }
+    public string Sobrenome { get; set; }
     public string Email { get; set; }
-    public string TipoDocumento { get; set; }
-    public string NumeroDocumento { get; set; }
     public string SenhaHash { get; set; }
-    public int Status { get; set; }
+    public int Status { get; set; } = 1; // Ativo por padrão
     public int? GerenteId { get; set; }
+    public int? CargoId { get; set; }
+    public int? DepartamentoId { get; set; }
 }
 ```
 
@@ -89,67 +104,115 @@ public class UsuarioDto
 
 ### 3. Mapper (`UsuarioMapper.cs`)
 
-**Responsabilidade:** Converter entre DTO e Model.
+**Responsabilidade:** Converter entre DTO e Model nos dois sentidos.
 
 **Por que foi feito assim:**
 
-- Mantém o código do Controller limpo
-- Centraliza a lógica de transformação
+- Mantém o Controller e o Service limpos
+- Centraliza a lógica de transformação de dados
 - Facilita manutenção quando a estrutura muda
 
 ```csharp
-public static UsuarioModel ParaModel(UsuarioDto dto)
-{
-    return new UsuarioModel
-    {
-        Nome = dto.Nome,
-        Email = dto.Email,
-        // ... outros campos
-    };
-}
+// DTO → Model (entrada de dados)
+public static UsuarioModel ParaModel(UsuarioDto dto) { ... }
+
+// Model → DTO (saída de dados / PATCH)
+public static UsuarioDto ParaDto(UsuarioModel model) { ... }
 ```
 
 ---
 
 ### 4. Model (`UsuarioModel.cs`)
 
-**Responsabilidade:** Representar a entidade de domínio com suas validações.
+**Responsabilidade:** Representar a entidade de domínio com suas validações internas.
 
 **Por que foi feito assim:**
 
-- **Validação de Email:** Implementada como setter com validação
-- **Validação de Documento:** CPF/CNPJ com validação de dígitos
-- **Encapsulamento:** Propriedades privadas com validação no setter
+- **Validação de Email:** Implementada no setter com `UsuarioValidator.EhEmailValido()`
+- **Encapsulamento:** Propriedades privadas com validação no setter garantem integridade dos dados
+- **Status padrão:** `Ativo (1)` por convenção
 
-**Validações implementadas:**
+**Campos:**
 
-- ✅ Email válido (formato `user@domain.com`)
-- ✅ CPF (11 dígitos com validação)
-- ✅ CNPJ (14 dígitos com validação)
-- ✅ Status padrão: `Ativo`
+| Campo            | Tipo       | Descrição                             |
+| ---------------- | ---------- | ------------------------------------- |
+| `Id`             | `int`      | Identificador único                   |
+| `Nome`           | `string`   | Primeiro nome                         |
+| `Sobrenome`      | `string`   | Sobrenome                             |
+| `Email`          | `string`   | E-mail com validação no setter        |
+| `SenhaHash`      | `string`   | Hash da senha                         |
+| `Status`         | `int`      | `0 = Inativo`, `1 = Ativo`            |
+| `DataCriacao`    | `DateTime` | Gerado automaticamente no Mapper      |
+| `GerenteId`      | `int?`     | Referência ao gestor (nullable)       |
+| `CargoId`        | `int?`     | Referência ao cargo (nullable)        |
+| `DepartamentoId` | `int?`     | Referência ao departamento (nullable) |
 
 ---
 
 ### 5. Service (`UsuarioService.cs`)
 
-**Responsabilidade:** Lógica de negócio e manipulação de dados.
+**Responsabilidade:** Lógica de negócio — orquestra as operações delegando ao Repository.
 
 **Por que foi feito assim:**
 
-- Centraliza toda a lógica de negócio
-- Atualmente usa lista em memória (para desenvolvimento)
-- Pode ser facilmente adaptado para banco de dados
+- Não acessa o banco diretamente — depende de `IUsuarioRepository`
+- Facilita testes unitários (basta mockar o repository)
+- Respeita o princípio da inversão de dependência (DIP — SOLID)
 
 **Métodos:**
-| Método | Descrição |
-|--------|-----------|
-| `ObterTodos()` | Retorna lista de usuários |
-| `ObterPorId(id)` | Retorna usuário por ID |
-| `Adicionar(usuario)` | Adiciona novo usuário |
+
+| Método               | Descrição                           |
+| -------------------- | ----------------------------------- |
+| `ObterTodos()`       | Retorna todos os usuários do banco  |
+| `ObterPorId(id)`     | Retorna um usuário por ID ou `null` |
+| `Adicionar(usuario)` | Persiste um novo usuário            |
+| `Atualizar(usuario)` | Atualiza um usuário existente       |
 
 ---
 
-## Fluxo de uma Requisição POST
+### 6. Repository (`UsuarioRepository.cs`)
+
+**Responsabilidade:** Abstração do acesso ao banco de dados via Entity Framework.
+
+**Por que foi feito assim:**
+
+- Isola o `DbContext` do restante da aplicação
+- Usa `AsNoTracking()` em queries de leitura para melhor performance
+- Chama `SaveChanges()` internamente — o Service não precisa saber disso
+- Facilita trocar a fonte de dados futuramente sem alterar Service ou Controller
+
+```csharp
+public IReadOnlyList<UsuarioModel> ObterTodos()
+{
+    return _context.Usuarios
+        .AsNoTracking()
+        .ToList()
+        .AsReadOnly();
+}
+```
+
+---
+
+### 7. DbContext (`ApplicationDbContext.cs`)
+
+**Responsabilidade:** Mapeamento ORM e comunicação com o banco de dados.
+
+```csharp
+public DbSet<UsuarioModel> Usuarios { get; set; }
+```
+
+---
+
+## Injeção de Dependência (`Program.cs`)
+
+Todos os componentes são registrados com ciclo de vida `Scoped` — uma instância por requisição HTTP:
+
+```csharp
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+```
+
+## Fluxo de uma Requisição POST `/usuarios`
 
 ```
 1. Cliente envia POST /usuarios com JSON
@@ -159,103 +222,83 @@ public static UsuarioModel ParaModel(UsuarioDto dto)
          │
          ▼
 3. Mapper converte DTO → Model
-   (Validações de domínio são executadas aqui)
+   (Validações de domínio executadas aqui,
+    ex: Email inválido lança ArgumentException)
          │
          ▼
-4. Service processa e adiciona à lista
+4. Controller chama _service.Adicionar(model)
          │
          ▼
-5. Controller retorna 201 Created
-   com o usuário criado
+5. Service delega para _repository.Adicionar(model)
+         │
+         ▼
+6. Repository persiste via EF e chama SaveChanges()
+         │
+         ▼
+7. Controller retorna 201 Created
+   com Location header apontando para GET /usuarios/{id}
 ```
 
 ---
 
-## O que Poderia Melhorar
+## Fluxo de uma Requisição PATCH `/usuarios/{id}`
 
-### 1. 🔴 Implementar Validação Real de CPF/CNPJ
+```
+1. Cliente envia PATCH /usuarios/{id} com JsonPatchDocument
+         │
+         ▼
+2. Controller verifica se o usuário existe via _service.ObterPorId(id)
+         │
+         ▼
+3. Model é convertido para DTO via Mapper.ParaDto()
+         │
+         ▼
+4. patchDoc.ApplyTo(dto) aplica apenas os campos enviados
+         │
+         ▼
+5. DTO é reconvertido para Model via Mapper.ParaModel()
+         │
+         ▼
+6. Service chama _repository.Atualizar(model)
+         │
+         ▼
+7. Controller retorna 204 No Content
+```
 
-Os métodos `EhCpf()` e `EhCnpj()` atualmente retornam `true` sempre:
+## O que Ainda Pode Melhorar
+
+### 1. 🟡 FluentValidation no DTO
+
+Atualmente as validações estão no setter do Model. O ideal é validar na entrada (DTO) antes do mapeamento:
 
 ```csharp
-// TODO: Implementar validador de cpf
-public static bool EhCpf(string cpf)
+public class UsuarioDtoValidator : AbstractValidator<UsuarioDto>
 {
-    return true; // ← Temporário
+    public UsuarioDtoValidator()
+    {
+        RuleFor(x => x.Email).EmailAddress();
+        RuleFor(x => x.Nome).NotEmpty().MaximumLength(100);
+    }
 }
 ```
 
-**Solução:** Implementar algoritmo de validação de dígitos verificadores.
+### 2. 🟡 Respostas Assíncronas (async/await)
 
----
-
-### 2. 🔴 Adicionar Repository Pattern
-
-Actualmente o `UsuarioService` gerencia diretamente a lista em memória:
+Os métodos do Repository e Service podem ser migrados para `async/await` para não bloquear threads em I/O:
 
 ```csharp
-private static List<UsuarioModel> _usuarios = new List<UsuarioModel>();
-```
-
-**Melhoria:** Criar uma camada de Repository para abstrair a fonte de dados:
-
-```
-Service → Repository → (Banco de Dados / Cache / API)
-```
-
-Isso permite:
-
-- Trocar a fonte de dados sem alterar o Service
-- Facilitar testes unitários com mock
-- Adicionar caching futuramente
-
----
-
-### 3. 🔴 Injeção de Dependência
-
-O Service está sendo instanciado diretamente no Controller:
-
-```csharp
-private readonly UsuarioService _service = new UsuarioService();
-```
-
-**Melhoria:** Usar injeção de dependência do .NET:
-
-```csharp
-public UsuariosController(UsuarioService service)
+public async Task<IReadOnlyList<UsuarioModel>> ObterTodosAsync()
 {
-    _service = service;
+    return await _context.Usuarios
+        .AsNoTracking()
+        .ToListAsync();
 }
 ```
 
-E registrar no `Program.cs`:
+### 3. 🟡 Retornar DTO no lugar de Model
 
-```csharp
-builder.Services.AddScoped<UsuarioService>();
-```
+Os endpoints atualmente retornam `UsuarioModel` diretamente. O correto é retornar um DTO de resposta para não expor detalhes internos como `SenhaHash`.
 
----
+### 4. 🟡 Tratamento Global de Exceções
 
-### 4. 🔴 Adicionar Validação de Entrada (FluentValidation)
-
-As validações estão no Model, mas seria melhor usar FluentValidation para:
-
-- Mensagens de erro mais detalhadas
-- Validações complexas mais legíveis
-- Separação de concerns
-
----
-
-### 5. 🔴 Documentação com Swagger
-
-O Swagger já está configurado, mas pode ser melhorado com:
-
-- Descrição dos endpoints
-- Exemplos de request/response
-- Anotações de resposta (códigos HTTP)
-
----
-
-## Conclusão
-
-Este padrão de arquitetura (Controller → Service → Model) é escalável e segue boas práticas de Clean Architecture. As melhorias sugeridas são para quando o projeto crescer em complexidade e necessidade de manutenção.
+Adicionar um middleware para capturar `ArgumentException` (lançada pelo setter de Email) e retornar `400 Bad Request` de forma padronizada, em vez de deixar o erro estourar.

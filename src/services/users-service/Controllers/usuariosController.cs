@@ -6,6 +6,8 @@ using usersService.Services;
 using usersService.Validators;
 using System.Net.Mail;
 using Microsoft.AspNetCore.JsonPatch;
+using usersService.Data;
+using System.Data.Common;
 
 namespace usersService.Controllers;
 
@@ -30,53 +32,41 @@ public class UsuariosController : ControllerBase
     public IActionResult GetById(int id)
     {
         var usuario = _service.ObterPorId(id);
-        if (usuario == null)
-            return NotFound();
-
+        if (usuario == null) return NotFound();
         return Ok(usuario);
     }
 
     [HttpPost]
     public IActionResult Create(UsuarioDto dto)
     {
-        var usuario = UsuarioMapper.ParaModel(dto);
-        var usuarioCriado = _service.Adicionar(usuario);
-
-        return CreatedAtAction(nameof(GetById), new { id = usuarioCriado.Id }, usuarioCriado);
+        var model = UsuarioMapper.ParaModel(dto);
+        var criado = _service.Adicionar(model);
+        return CreatedAtAction(nameof(GetById), new { id = criado.Id }, criado);
     }
 
     [HttpPut("{id}")]
     public IActionResult Update(int id, UsuarioDto dto)
     {
-        var usuarioExistente = _service.ObterPorId(id);
-        if (usuarioExistente == null)
-            return NotFound();
+        if (_service.ObterPorId(id) == null) return NotFound();
 
-        var usuarioAtualizado = UsuarioMapper.ParaModel(dto);
-        usuarioAtualizado.Id = id;
-
-        _service.Atualizar(usuarioAtualizado);
-
+        var model = UsuarioMapper.ParaModel(dto);
+        model.Id = id;
+        _service.Atualizar(model);
         return NoContent();
     }
 
     [HttpPatch("{id}")]
     public IActionResult Patch(int id, JsonPatchDocument<UsuarioDto> patchDoc)
     {
-        var usuarioExistente = _service.ObterPorId(id);
-        if (usuarioExistente == null)
-            return NotFound();
+        var existente = _service.ObterPorId(id);
+        if (existente == null) return NotFound();
 
-        var dto = UsuarioMapper.ParaDto(usuarioExistente);
+        var dto = UsuarioMapper.ParaDto(existente);
         patchDoc.ApplyTo(dto);
 
-        var usuarioAtualizado = UsuarioMapper.ParaModel(dto);
-        usuarioAtualizado.Id = id;
-
-        _service.Atualizar(usuarioAtualizado);
-
+        var model = UsuarioMapper.ParaModel(dto);
+        model.Id = id;
+        _service.Atualizar(model);
         return NoContent();
     }
 }
-
-
