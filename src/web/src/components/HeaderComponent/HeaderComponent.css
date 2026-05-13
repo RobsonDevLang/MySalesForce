@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@600&display=swap");
+
+.custom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 28px;
+  height: 68px;
+  background: #fff;
+  border-bottom: 0.5px solid #e5e3f8;
+  font-family: "DM Sans", sans-serif;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-item {
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 7px 16px;
+  border-radius: 7px;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
+  white-space: nowrap;
+  color: #555;
+}
+
+.menu-item:hover {
+  background: #eeedfe;
+  color: #3c3489;
+}
+
+.btn-ghost {
+  border: 0.5px solid #d0cef5;
+  color: #534ab7;
+  padding: 10px 15px;
+}
+
+.btn-ghost:hover {
+  border-color: #534ab7;
+  background: transparent;
+}
+
+.btn-solid {
+  background: #534ab7;
+  color: #fff !important;
+  border: none;
+}
+
+.btn-solid:hover {
+  background: #3c3489;
+}
+
+/* Input override */
+.custom-input {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 0.5px solid #d0cef5;
+  outline: none;
+  font-family: "DM Sans", sans-serif;
+  font-size: 13.5px;
+  background: #f8f7ff;
+  color: #333;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.custom-input:hover,
+.custom-input:focus {
+  border-color: #534ab7;
+}

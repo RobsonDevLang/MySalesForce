@@ -1,25 +1,34 @@
 import InputComponent from "../InputComponent/InputComponent";
 import logo from "../../assets/logo.png";
 import { BrowserRouter as Router, Link } from "react-router-dom";
+import "./HeaderComponent.css";
+import CategoriasComponent from "../CategoriasComponent/CategoriasComponent";
+import ButtonComponent from "../ButtonComponent/ButtonComponent";
 
 function HeaderComponent() {
   return (
     <>
       <header className="custom-header">
+        <div className="header-logo">
+          <img src={logo} alt="Logo MySalesForce" className="logo-style" />
+        </div>
+
+        <InputComponent placeholder="Pesquisar: Ex.: Roupa..." wdt={240} />
+
         <nav className="menu">
-          <li className="menu-item">
-            <Link to="/sobre">Sobre</Link>
-          </li>
-          <a href="#" className="menu-item">
+          <Link to="/sobre" className="menu-item">
+            Sobre
+          </Link>
+          <Link to="/login" className="menu-item btn-ghost">
             Login
-          </a>
-          <a href="#" className="menu-item">
-            Cadastrar-se
-          </a>
-          <InputComponent placeholder="Pesquisar: Ex.: Roupa..."></InputComponent>
+          </Link>
+          <ButtonComponent
+            label="Cadastrar-se"
+            to="/cadastrar"
+          ></ButtonComponent>
         </nav>
-        <img src={logo} alt="Logo MySalesForce" className="logo-style" />
       </header>
+      <CategoriasComponent />
     </>
   );
 }

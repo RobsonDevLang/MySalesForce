@@ -1,9 +1,10 @@
 import { useState, type SetStateAction } from "react";
 import "./App.css";
-import ButtonComponent from "./components/ButtonComponent/ButtonComponent";
-import SelectComponent from "./components/SelectComponent/SelectComponent";
-import TableComponent from "./components/TableComponent/TableComponent";
+// import ButtonComponent from "./components/ButtonComponent/ButtonComponent";
+// import SelectComponent from "./components/SelectComponent/SelectComponent";
+// import TableComponent from "./components/TableComponent/TableComponent";
 import HeaderComponent from "./components/HeaderComponent/HeaderComponent";
+import CarrosselComponent from "./components/CarrosselComponent/CarrosselComponent";
 
 function App() {
   const [selectedOption, setSelectedOption] = useState("option1");
@@ -11,7 +12,8 @@ function App() {
   return (
     <>
       <HeaderComponent />
-      <hr />
+      <CarrosselComponent />
+      {/* 
       <h3 className="custom-h3">Primeiros components em React</h3>
       <ButtonComponent label="Clique aqui"></ButtonComponent> <br />
       <SelectComponent
@@ -31,6 +33,7 @@ function App() {
           ["Jane Smith", "jane@example.com", "(098) 765-4321"],
         ]}
       />
+       */}
     </>
   );
 }
