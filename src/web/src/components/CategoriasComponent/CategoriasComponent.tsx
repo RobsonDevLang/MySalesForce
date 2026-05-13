@@ -1,17 +1,34 @@
+import { useState } from "react";
 import "./CategoriasComponent.css";
 
 function CategoriasComponent() {
+  const categorias = [
+    "Ofertas",
+    "Feminino",
+    "Masculino",
+    "Inverno",
+    "Verão",
+    "Infantil",
+    "Acessórios",
+  ];
+
+  const [ativa, setAtiva] = useState("Ofertas");
+
   return (
     <>
       <nav className="categorias-container">
         <ul className="categorias-list">
-          <li className="categoria-item">Ofertas</li>
-          <li className="categoria-item">Feminino</li>
-          <li className="categoria-item">Masculino</li>
-          <li className="categoria-item">Inverno</li>
-          <li className="categoria-item">Verão</li>
-          <li className="categoria-item">Infantil</li>
-          <li className="categoria-item">Acessórios</li>
+          {categorias.map((categoria) => {
+            return (
+              <li
+                key={categoria}
+                className={`categoria-item ${ativa === categoria ? "active" : ""}`}
+                onClick={() => setAtiva(categoria)}
+              >
+                {categoria}
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </>
