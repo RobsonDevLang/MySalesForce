@@ -12,7 +12,6 @@ function App() {
   return (
     <>
       <HeaderComponent />
-      <CarrosselComponent />
       {/* 
       <h3 className="custom-h3">Primeiros components em React</h3>
       <ButtonComponent label="Clique aqui"></ButtonComponent> <br />
