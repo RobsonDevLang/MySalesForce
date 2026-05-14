@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using UserService.Data;
+using User.Data;
 
 #nullable disable
 
-namespace UserService.Api.Migrations
+namespace User.Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20260513185243_InitialCreate")]

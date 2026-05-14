@@ -1,8 +1,8 @@
 using System;
-using UserService.DTO;
-using UserService.Models;
+using User.DTO;
+using User.Models;
 
-namespace UserService.Mappers
+namespace User.Mappers
 {
 public static class UsuarioMapper
 {

@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
-using UserService.DTO;
-using UserService.Mappers;
-using UserService.Models;
-using UserService.Services;
-using UserService.Validators;
+using User.DTO;
+using User.Mappers;
+using User.Models;
+using User.Services;
+using User.Validators;
 using System.Net.Mail;
 using Microsoft.AspNetCore.JsonPatch;
-using UserService.Data;
+using User.Data;
 using System.Data.Common;
 
-namespace UserService.Controllers;
+namespace User.Controllers;
 
 [ApiController]
 [Route("user")]

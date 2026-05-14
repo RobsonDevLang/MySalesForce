@@ -25,7 +25,7 @@ Este documento explica como o serviço de usuários foi estruturado e o motivo d
                                 ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                      Service Layer                               │
-│                    (UsuarioService.cs)                           │
+│                    (UserService.cs)                           │
 │  - Lógica de negócio                                             │
 │  - Validações de domínio                                         │
 │  - Orquestra chamadas ao Repository                              │
@@ -149,7 +149,7 @@ public static UserDto ForDto(UserModel model) { ... }
 
 ---
 
-### 5. Service (`UsuarioService.cs`)
+### 5. Service (`UserService.cs`)
 
 **Responsabilidade:** Lógica de negócio — orquestra as operações delegando ao Repository.
 
@@ -209,7 +209,7 @@ Todos os componentes são registrados com ciclo de vida `Scoped` — uma instân
 
 ```csharp
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUserService, UsuarioService>();
+builder.Services.AddScoped<IUserService, UserService>();
 ```
 
 ## Fluxo de uma Requisição POST `/user`

@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Net.Mail;
 
-namespace UserService.Validators
+namespace User.Validators
 {
     public static class UserValidator
     {
