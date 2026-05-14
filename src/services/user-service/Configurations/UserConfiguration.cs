@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using UserService.Models;
+using User.Models;
 
-namespace UserService.Configurations
+namespace User.Configurations
 {
     public class UserConfiguration : IEntityTypeConfiguration<UserModel>
     {

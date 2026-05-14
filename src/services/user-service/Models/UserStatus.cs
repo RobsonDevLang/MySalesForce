@@ -1,4 +1,4 @@
-namespace UserService.Models
+namespace User.Models
 {
     public enum UserStatus
     {

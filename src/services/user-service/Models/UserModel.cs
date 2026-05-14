@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
-using UserService.Validators;
+using User.Validators;
 
-namespace UserService.Models
+namespace User.Models
 {
 public class UserModel
     {

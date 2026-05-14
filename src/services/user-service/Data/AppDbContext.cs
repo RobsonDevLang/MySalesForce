@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using UserService.Configurations;
-using UserService.Models;
-using UserService.Services;
+using User.Configurations;
+using User.Models;
+using User.Services;
 
-namespace UserService.Data
+namespace User.Data
 {
     public class ApplicationDbContext : DbContext
     {
