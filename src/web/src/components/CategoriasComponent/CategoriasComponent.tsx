@@ -18,17 +18,15 @@ function CategoriasComponent() {
     <>
       <nav className="categorias-container">
         <ul className="categorias-list">
-          {categorias.map((categoria) => {
-            return (
-              <li
-                key={categoria}
-                className={`categoria-item ${ativa === categoria ? "active" : ""}`}
-                onClick={() => setAtiva(categoria)}
-              >
-                {categoria}
-              </li>
-            );
-          })}
+          {categorias.map((cat) => (
+            <li
+              key={cat}
+              className={`categoria-item ${ativa === cat ? "active" : ""}`}
+              onClick={() => setAtiva(cat)}
+            >
+              {cat}
+            </li>
+          ))}
         </ul>
       </nav>
     </>
