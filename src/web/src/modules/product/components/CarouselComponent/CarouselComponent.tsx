@@ -33,7 +33,7 @@ export default function CarrosselComponent() {
   const carrouselRef = useRef(null as unknown as HTMLDivElement);
 
   useEffect(() => {
-    fetch("http://localhost:5173/src/assets/product.json").then((response) => {
+    fetch("/product.json").then((response) => {
       response.json().then(setproduct);
     });
   }, []);
