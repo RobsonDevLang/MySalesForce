@@ -1,35 +1,40 @@
 %
+
 # Domínio CRM
 
 ## Objetivo
+
 Responsável pelo relacionamento com leads, clientes, contatos, oportunidades e atividades comerciais.
 
 ## Entidades principais
+
 - Lead/Cliente
 - Contato
 - Endereco
 - Oportunidade
 - Atividade
-- Usuario
+- AppUser
 
 ## Diagrama ER
+
 %
+
 ```mermaid
 erDiagram
     LEAD/CLIENTE {
         int Id PK
-        string Nome
+        string Name
         string Email
         sring TipoDocumento
         string Documento
         string TipoPessoa
         string Status
-        datetime DataCriacao
+        datetime CreateDate
     }
 
     CONTATO {
         int Id PK
-        string Nome
+        string Name
         string Email
         string Telefone
         string Cargo
@@ -55,7 +60,7 @@ erDiagram
         decimal ValorEstimado
         string Etapa
         string Status
-        datetime DataCriacao
+        datetime CreateDate
         int ClienteId FK
         int ResponsavelId FK
     }
@@ -74,7 +79,7 @@ erDiagram
 
     USUARIO {
         int Id PK
-        string Nome
+        string Name
         string Email
     }
 
@@ -86,3 +91,4 @@ erDiagram
     USUARIO ||--o{ OPORTUNIDADE : responsavel_por
     USUARIO ||--o{ ATIVIDADE : responsavel_por
     OPORTUNIDADE o|--o{ ATIVIDADE : gera
+```

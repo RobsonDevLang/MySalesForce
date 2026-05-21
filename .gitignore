@@ -3,7 +3,7 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
-# User-specific files
+# AppUser-specific files
 *.rsuser
 *.suo
 *.user
@@ -11,7 +11,7 @@
 *.sln.docstates
 *.env
 
-# User-specific files (MonoDevelop/Xamarin Studio)
+# AppUser-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
 # Mono auto generated files
@@ -410,6 +410,7 @@ FodyWeavers.xsd
 
 # VS Code files for those working on multiple tools
 .vscode/*
+.vscode
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -459,3 +460,4 @@ Thumbs.db
 *.http
 
 .fake
+*.lscache

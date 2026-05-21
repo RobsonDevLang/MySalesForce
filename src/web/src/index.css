@@ -6,6 +6,9 @@ body {
   background-position: center;
   margin: 0;
   padding: 0;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 100vh;
   /* height: 100vh; */
   font-family: "Inter", sans-serif;
   font-weight: 700; /* Bold */
@@ -13,20 +16,18 @@ body {
 }
 
 .logo-style {
-  width: 250px;
-  margin-top: 10px;
-  margin-left: -5px;
+  width: 15.625rem;
 }
 
 hr {
   margin: 0;
-  height: 0.5px;
+  height: 0.03125rem;
   background-color: #2a48df;
   border: none;
   border-top: none;
 }
 
 .custom-h3 {
-  margin: 10px;
+  margin: 0.625rem;
   color: #2a48df;
 }
