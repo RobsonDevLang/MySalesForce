@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using User.Data;
 using System.Data.Common;
 
-namespace User.Controllers;
+namespace User.Controllers{
 
 [ApiController]
 [Route("user")]
@@ -69,4 +69,5 @@ public class UserController : ControllerBase
         _service.Update(model);
         return NoContent();
     }
+}
 }

@@ -1,8 +1,9 @@
 import { useState, useRef } from "react";
 import "./CarouselComponent.css";
 import { useEffect } from "react";
-import ButtonComponent from "../../../../shared/components/ButtonComponent/ButtonComponent";
-import flecha from "../../../../assets/flecha.png";
+import ButtonComponent from "@/shared/components/ButtonComponent/ButtonComponent";
+
+import flecha from "@/assets/flecha.png";
 
 export default function CarrosselComponent() {
   const [product, setproduct] = useState([]);

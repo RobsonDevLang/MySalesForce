@@ -1,7 +1,7 @@
 import { useState, type SetStateAction } from "react";
-import ButtonComponent from "../../../../src/shared/components/ButtonComponent/ButtonComponent";
-import SelectComponent from "../../../../src/shared/components/SelectComponent/SelectComponent";
-import TableComponent from "../../../../src/shared/components/TableComponent/TableComponent";
+import ButtonComponent from "@/shared/components/ButtonComponent/ButtonComponent";
+import SelectComponent from "@/shared/components/SelectComponent/SelectComponent";
+import TableComponent from "@/shared/components/TableComponent/TableComponent";
 
 function Sobre() {
   const [selectedOption, setSelectedOption] = useState("option1");
