@@ -1,4 +1,3 @@
-import { useState, type SetStateAction } from "react";
 import "./App.css";
 import HeaderComponent from "./shared/components/HeaderComponent/HeaderComponent";
 import CarrosselComponent from "./modules/product/components/CarouselComponent/CarouselComponent";
