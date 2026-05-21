@@ -1,5 +1,5 @@
 import InputComponent from "../InputComponent/InputComponent";
-import logo from "../../assets/logo.png";
+import logo from "@/assets/logo.png";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import "./HeaderComponent.css";
 import CategoriasComponent from "../CategoriasComponent/CategoriasComponent";
@@ -20,7 +20,7 @@ function HeaderComponent() {
           <img src={logo} alt="Logo MySalesForce" className="logo-style" />
         </div>
 
-        <InputComponent placeholder="Pesquisar: Ex.: Roupa..." wdt={240} />
+        <InputComponent placeholder="Pesquisar: Ex.: Roupa..." />
 
         <nav className="menu">
           <Link to="/sobre" className="menu-item">
@@ -35,7 +35,6 @@ function HeaderComponent() {
           ></ButtonComponent>
         </nav>
       </header>
-      <CategoriasComponent />
     </>
   );
 }
