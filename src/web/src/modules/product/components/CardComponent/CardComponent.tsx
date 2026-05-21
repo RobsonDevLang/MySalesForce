@@ -24,9 +24,7 @@ export default function CardComponent() {
 
   async function loadProducts() {
     try {
-      const response = await axios.get<Product[]>(
-        "http://localhost:5173/src/assets/product.json",
-      );
+      const response = await axios.get<Product[]>("/product.json");
 
       setProducts(response.data);
     } catch (error) {
