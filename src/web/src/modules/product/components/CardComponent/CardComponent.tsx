@@ -1,18 +1,9 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import "./CardComponent.css";
-import { IconButton } from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
 
-interface Product {
-  id: string;
-  name: string;
-  oldPrice?: string;
-  price: string;
-  image: string;
-  description: string;
-}
+import CardItem from "./CardItem";
+import type { Product } from "./types";
+import { getProducts } from "./services/productService";
 
 export default function CardComponent() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -24,9 +15,9 @@ export default function CardComponent() {
 
   async function loadProducts() {
     try {
-      const response = await axios.get<Product[]>("/product.json");
+      const data = await getProducts();
 
-      setProducts(response.data);
+      setProducts(data);
     } catch (error) {
       console.error("Erro ao buscar produtos:", error);
     }
@@ -66,39 +57,15 @@ export default function CardComponent() {
   return (
     <div className="box">
       <div className="container-card">
-        {products.map((product) => {
-          const isFavorite = favorites.includes(product.id);
-
-          return (
-            <div className="card" key={product.id}>
-              <div className="card-name">
-                <IconButton
-                  aria-label="favoritar"
-                  onClick={() => toggleFavorite(product.id)}
-                >
-                  <FavoriteIcon className={isFavorite ? "active" : ""} />
-                </IconButton>
-
-                <h2 className="name">{product.name}</h2>
-
-                <IconButton
-                  aria-label="compartilhar"
-                  onClick={() => handleShare(product)}
-                >
-                  <ShareIcon />
-                </IconButton>
-              </div>
-
-              <img className="image" src={product.image} alt={product.name} />
-
-              <div className="info">
-                <p className="description">{product.description}</p>
-
-                <span className="price">{product.price}</span>
-              </div>
-            </div>
-          );
-        })}
+        {products.map((product) => (
+          <CardItem
+            key={product.id}
+            product={product}
+            isFavorite={favorites.includes(product.id)}
+            onToggleFavorite={toggleFavorite}
+            onShare={handleShare}
+          />
+        ))}
       </div>
     </div>
   );
