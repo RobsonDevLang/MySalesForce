@@ -38,14 +38,16 @@ export default function CarrosselComponent() {
     });
   }, []);
 
-  const handleLeftClick = (e: Event) => {
-    e.preventDefault();
-    carrouselRef.current.scrollLeft -= carrouselRef.current.offsetWidth;
+  const handleLeftClick = () => {
+    if (carrouselRef.current) {
+      carrouselRef.current.scrollLeft -= carrouselRef.current.offsetWidth;
+    }
   };
 
-  const handleRightClick = (e: Event) => {
-    e.preventDefault();
-    carrouselRef.current.scrollLeft += carrouselRef.current.offsetWidth;
+  const handleRightClick = () => {
+    if (carrouselRef.current) {
+      carrouselRef.current.scrollLeft += carrouselRef.current.offsetWidth;
+    }
   };
 
   if (!product || !product.length) return <div>Loading...</div>;
