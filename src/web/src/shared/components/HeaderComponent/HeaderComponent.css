@@ -1,0 +1,191 @@
+/* HeaderComponent.css */
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@600&display=swap");
+
+.custom-header {
+  width: 100%;
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  gap: 1rem;
+
+  padding: 0 1.75rem;
+  min-height: 4.25rem;
+
+  background: #fff;
+  border-bottom: 0.03125rem solid #e5e3f8;
+
+  font-family: "DM Sans", sans-serif;
+}
+
+/* LOGO */
+.header-logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.logo-style {
+  max-width: 9rem;
+  width: 100%;
+  height: auto;
+}
+
+/* MENU */
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.menu-item {
+  font-size: 0.84375rem;
+  font-weight: 500;
+
+  text-decoration: none;
+
+  padding: 0.4375rem 1rem;
+
+  border-radius: 0.4375rem;
+
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
+
+  white-space: nowrap;
+
+  color: #555;
+}
+
+.menu-item:hover {
+  background: #eeedfe;
+  color: #3c3489;
+}
+
+.btn-ghost {
+  border: 0.03125rem solid #d0cef5;
+  color: #534ab7;
+
+  padding: 0.625rem 0.9375rem;
+}
+
+.btn-ghost:hover {
+  border-color: #534ab7;
+  background: transparent;
+}
+
+.btn-solid {
+  background: #534ab7;
+  color: #fff !important;
+  border: none;
+}
+
+.btn-solid:hover {
+  background: #3c3489;
+}
+
+/* TABLET */
+@media (max-width: 768px) {
+  .custom-header {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem;
+
+    gap: 1rem;
+  }
+
+  .header-logo {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .menu {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 0.75rem;
+  }
+
+  .menu-item,
+  .btn-ghost,
+  .btn-solid,
+  .custom-button {
+    width: 100%;
+    max-width: 16rem;
+
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .custom-input {
+    width: 100%;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .custom-header {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 1rem;
+
+    gap: 1rem;
+  }
+
+  .header-logo {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+  }
+
+  .menu {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 0.75rem;
+  }
+
+  .menu-item,
+  .btn-ghost,
+  .btn-solid,
+  .custom-button {
+    width: 100%;
+    max-width: 16rem;
+
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .custom-input {
+    width: 100%;
+  }
+
+  .logo-style {
+    max-width: 7rem;
+  }
+}
