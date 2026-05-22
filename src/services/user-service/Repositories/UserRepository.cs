@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using UserService.Data;
-using UserService.Models;
+using User.Data;
+using User.Models;
 
-namespace UserService.Repositories
+namespace User.Repositories
 {
     public class UserRepository : IUserRepository
     {

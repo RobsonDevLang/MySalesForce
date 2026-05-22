@@ -1,6 +1,6 @@
-using UserService.Models;
+using User.Models;
 
-namespace UserService.DTO
+namespace User.DTO
 {
 public class UserDto
 {

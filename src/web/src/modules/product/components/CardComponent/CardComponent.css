@@ -1,0 +1,101 @@
+.container-card {
+  width: 100%;
+  max-width: 100rem; /* 1000px */
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.card-name {
+  display: flex;
+}
+
+.MuiSvgIcon-root.active {
+  fill: red;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  min-height: 12.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.name {
+  font-size: 1rem;
+  min-height: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.card .image {
+  width: 5.5rem;
+  object-fit: cover;
+}
+
+.description {
+  max-height: 40px;
+  overflow: hidden;
+  margin: 2px;
+  font-size: 11px;
+
+  transition: all 0.3s ease;
+}
+
+.description:hover {
+  max-height: 200px;
+  overflow: visible;
+
+  -webkit-line-clamp: unset;
+
+  background-color: white;
+  border-radius: 6px;
+  padding: 4px;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+  position: relative;
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .container-card {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .container-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+.botao-carrinho {
+  background-color: #28a745; /* Cor verde para o botão */
+  color: white; /* Texto branco */
+  border: none;
+  padding: 12px 24px; /* Espaçamento interno */
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px; /* Bordas arredondadas */
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaço entre o ícone e o texto */
+}
+
+.botao-carrinho:hover {
+  background-color: #218838; /* Cor mais escura ao passar o mouse */
+  transform: translateY(-2px); /* Leve efeito de elevação */
+}

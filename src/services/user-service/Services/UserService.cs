@@ -1,13 +1,13 @@
-using UserService.Models;
-using UserService.Repositories;
+using User.Models;
+using User.Repositories;
 
-namespace UserService.Services
+namespace User.Services
 {
-    public class UsuarioService : IUserService
+    public class UserService : IUserService
     {
         private readonly IUserRepository _repository;
 
-        public UsuarioService(IUserRepository repository)
+        public UserService(IUserRepository repository)
         {
             _repository = repository;
         }

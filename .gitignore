@@ -460,3 +460,4 @@ Thumbs.db
 *.http
 
 .fake
+*.lscache
