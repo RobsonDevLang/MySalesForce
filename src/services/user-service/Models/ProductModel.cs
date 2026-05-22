@@ -1,6 +1,6 @@
 
 // using Product.Validators;
-// using ProductImage.Models;
+using ProductImage.Models;
 using HistoricalPrice.Models;
 // using Mark.Models;
 // using Category.Models;
@@ -32,7 +32,7 @@ namespace Product.Models
 //        public Mark Mark {get; set;} = null!;
 
 // Relationships
-        // public List<ProductImageModel> Images {get; set;} = new();
+        public List<ProductImageModel> Images {get; set;} = new();
         public List<HistoricalPriceModel> HistoricalPrices {get; set;} = new();
 //        public List<StockProduct> StokProducts {get; set;} = new();
 

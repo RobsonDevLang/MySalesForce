@@ -1,6 +1,6 @@
 using Product.Models;
 
-namespace ProductCatalog.Models
+namespace ProductImage.Models
 {
     public class ProductImageModel
     {
@@ -11,7 +11,7 @@ namespace ProductCatalog.Models
         public string MainImage {get; set;} = string.Empty;
         public string AltText {get; set;} = string.Empty;
 
-        // public Product Product {get; set;}
+        public ProductModel Product {get; set;} = new ProductModel();
 
     }
 }
