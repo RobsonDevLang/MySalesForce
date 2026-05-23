@@ -7,7 +7,7 @@
  <li>Ajudar o time tecnicamente.
 </ul>
   
-## 🧩 @araujo-lorena — Organização + Backend (Python) + Segurança
+## 🧩 @lorena-naraujo — Organização + Backend (Python) + Segurança
 <ul>
  <li>Organização do projeto (GitHub Projects, tarefas, backlog)<br>
  <li>Apoio em documentação<br>

@@ -5,33 +5,33 @@
 - Em português
 - Em minúsculo
 - snake_case
-- Nome no singular
+- Name no singular
 - Sem acentos
 - Sem espaços
 - Sem caracter especial
 
 ## Chave Primária
 
-- id ou quando necessário: `id_`[nome do campo]
+- id ou quando necessário: `id_`[name do campo]
 - utilizar sempre chaves primarias nomeadas
 - utilizar o "INT GENERATED ALWAYS AS IDENTITY" em vez do "SERIAL"
 
 ## Chaves Estrangeiras
 
-- Nome igual ao da PK referenciada
+- Name igual ao da PK referenciada, como o exemplo a seguir: `[nome_tabela_referenciada]_id`
 - Relacionamento N:N as chaves devem ser NOT NULL nas FKs da tabela de relacionamento
 
 ## Datas
 
-- `data_`[nome da data]
+- `data_`[name da data]
 
 ## Status
 
-- utilizar o nome padrão: status
+- utilizar o name padrão: status
 
 ## Índices
 
-- `idx_`[nome do campo]
+- `idx_`[name do campo]
 
 ## Padrão de Constraints
 
@@ -55,7 +55,7 @@
 ## Valores Monetários
 
 - Utilizar DECIMAL(10,2)
-- Nomear colunas com prefixo valor\_ ou nome descritivo, exemplos: valor_desconto e preco
+- Nomear colunas com prefixo `valor_` ou name descritivo, exemplos: valor_desconto e preco
 
 ## Boas Práticas
 
@@ -79,7 +79,7 @@
 
 ## Tabelas de Relacionamento
 
-- Utilizar nome composto pelas tabelas relacionadas
+- Utilizar name composto pelas tabelas relacionadas
 - Exemplo:
   usuario_permissao
   produto_categoria

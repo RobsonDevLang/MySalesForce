@@ -3,7 +3,7 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
-# User-specific files
+# AppUser-specific files
 *.rsuser
 *.suo
 *.user
@@ -11,7 +11,7 @@
 *.sln.docstates
 *.env
 
-# User-specific files (MonoDevelop/Xamarin Studio)
+# AppUser-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
 # Mono auto generated files
@@ -460,3 +460,4 @@ Thumbs.db
 *.http
 
 .fake
+*.lscache
