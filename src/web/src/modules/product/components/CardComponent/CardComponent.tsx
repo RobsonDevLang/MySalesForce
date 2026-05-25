@@ -16,7 +16,6 @@ export default function CardComponent() {
   async function loadProducts() {
     try {
       const data = await getProducts();
-
       setProducts(data);
     } catch (error) {
       console.error("Erro ao buscar produtos:", error);
