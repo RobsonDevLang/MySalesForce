@@ -26,6 +26,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 0;
 }
 
 .name {
@@ -75,6 +76,15 @@
 @media (max-width: 500px) {
   .container-card {
     grid-template-columns: 1fr;
+    padding: 0.75rem;
+  }
+
+  .custom-button.AddCar span {
+    display: none;
+  }
+
+  .custom-button.AddCar {
+    padding: 0 0.6rem;
   }
 }
 
