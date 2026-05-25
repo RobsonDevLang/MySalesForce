@@ -9,7 +9,7 @@ using User.Data;
 
 #nullable disable
 
-namespace User.Api.Migrations
+namespace User.Service.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20260513185243_InitialCreate")]
