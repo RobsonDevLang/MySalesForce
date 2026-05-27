@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseAppHost>false</UseAppHost>
     <RootNamespace>User</RootNamespace>
-    <AssemblyName>User.Api</AssemblyName>
+    <AssemblyName>User.Service</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
