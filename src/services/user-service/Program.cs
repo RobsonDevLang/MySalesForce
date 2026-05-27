@@ -18,6 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
            .UseSnakeCaseNamingConvention());
 
+
 //pega as configurações do appsettings.[development ou production].json
 var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();           
 
@@ -34,6 +35,7 @@ builder.Services.AddCors(options =>
     });
 });
            
+
 var app = builder.Build();
 
 app.UseCors("AllowFrontend");
