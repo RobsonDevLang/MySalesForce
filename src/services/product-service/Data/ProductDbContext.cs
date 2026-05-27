@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using User.Configurations;
+using Product.Configurations;
 using Product.Models;
 using Product.Services;
 
