@@ -6,7 +6,7 @@ using HistoricalPrice.Models;
 // using Category.Models;
 // using Conditional.Models;
 
-namespace ProductService.Models
+namespace Product.Models
 {
     public class ProductModel
     {
