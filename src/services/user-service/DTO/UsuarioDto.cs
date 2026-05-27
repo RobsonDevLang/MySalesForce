@@ -12,5 +12,6 @@ public class UserDto
     public int? ManagerId { get; set; }
     public int? PositionId { get; set; }
     public int? DepartmentId { get; set; }
+
 }
 }

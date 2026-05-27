@@ -11,11 +11,7 @@ namespace ProductImage.Models
         public string MainImage {get; set;} = string.Empty;
         public string AltText {get; set;} = string.Empty;
 
-<<<<<<< HEAD
         public ProductModel Product {get; set;} = new ProductModel();
-=======
-        // public Product Product {get; set;}
->>>>>>> 19ce9cde1254b5546495009939609fbc4aba7095
 
     }
 }
