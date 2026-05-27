@@ -3,6 +3,9 @@ using User.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
 using User.Repositories;
+using Product.Services;
+using Product.Data;
+using Product.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +20,11 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
            .UseSnakeCaseNamingConvention());
+builder.Services.AddDbContext<ProductDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+            .UseSnakeCaseNamingConvention());
            
+
 var app = builder.Build();
 
 
