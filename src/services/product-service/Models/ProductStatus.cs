@@ -1,4 +1,4 @@
-namespace ProductService.Models
+namespace Product.Models
 {
     public enum ProductStatus
     {
