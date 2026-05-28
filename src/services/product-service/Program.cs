@@ -1,8 +1,8 @@
-using Product.Services;
 using Product.Data;
 using Product.Repositories;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
+using Product.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

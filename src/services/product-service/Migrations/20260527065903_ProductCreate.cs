@@ -13,7 +13,7 @@ namespace product_service.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "products",
+                name: "product",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
@@ -33,7 +33,7 @@ namespace product_service.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_products", x => x.id);
+                    table.PrimaryKey("pk_product", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -51,9 +51,9 @@ namespace product_service.Migrations
                 {
                     table.PrimaryKey("pk_historical_price_model", x => x.id);
                     table.ForeignKey(
-                        name: "fk_historical_price_model_products_product_id",
+                        name: "fk_historical_price_model_product_product_id",
                         column: x => x.product_id,
-                        principalTable: "products",
+                        principalTable: "product",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -74,9 +74,9 @@ namespace product_service.Migrations
                 {
                     table.PrimaryKey("pk_product_image_model", x => x.id);
                     table.ForeignKey(
-                        name: "fk_product_image_model_products_product_id",
+                        name: "fk_product_image_model_product_product_id",
                         column: x => x.product_id,
-                        principalTable: "products",
+                        principalTable: "product",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -92,8 +92,8 @@ namespace product_service.Migrations
                 column: "product_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_products_code",
-                table: "products",
+                name: "ix_product_code",
+                table: "product",
                 column: "code",
                 unique: true);
         }
@@ -108,7 +108,7 @@ namespace product_service.Migrations
                 name: "product_image_model");
 
             migrationBuilder.DropTable(
-                name: "products");
+                name: "product");
         }
     }
 }

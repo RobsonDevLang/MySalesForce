@@ -1,4 +1,4 @@
-using ProductService.Models;
+using Product.Models;
 
 namespace ProductImage.Models
 {

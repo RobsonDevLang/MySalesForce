@@ -121,13 +121,13 @@ namespace product_service.Migrations
                         .HasColumnName("width");
 
                     b.HasKey("Id")
-                        .HasName("pk_products");
+                        .HasName("pk_product");
 
                     b.HasIndex("Code")
                         .IsUnique()
-                        .HasDatabaseName("ix_products_code");
+                        .HasDatabaseName("ix_product_code");
 
-                    b.ToTable("products", (string)null);
+                    b.ToTable("product", (string)null);
                 });
 
             modelBuilder.Entity("ProductImage.Models.ProductImageModel", b =>
@@ -178,7 +178,7 @@ namespace product_service.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_historical_price_model_products_product_id");
+                        .HasConstraintName("fk_historical_price_model_product_product_id");
 
                     b.Navigation("Product");
                 });
@@ -190,7 +190,7 @@ namespace product_service.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_product_image_model_products_product_id");
+                        .HasConstraintName("fk_product_image_model_product_product_id");
 
                     b.Navigation("Product");
                 });

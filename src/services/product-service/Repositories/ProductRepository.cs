@@ -15,7 +15,7 @@ namespace Product.Repositories
 
         public IReadOnlyList<ProductModel> GetAll()
         {
-            return _context.Products
+            return _context.Product
                 .AsNoTracking()
                 .ToList()
                 .AsReadOnly();
@@ -23,21 +23,21 @@ namespace Product.Repositories
 
         public ProductModel? GetById(int id)
         {
-            return _context.Products
+            return _context.Product
                 .AsNoTracking()
                 .FirstOrDefault(p => p.Id == id);
         }
 
         public ProductModel Add(ProductModel product)
         {
-            _context.Products.Add(product);
+            _context.Product.Add(product);
             _context.SaveChanges();
             return product;
         }
 
         public void Update(ProductModel product)
         {
-            _context.Products.Update(product);
+            _context.Product.Update(product);
             _context.SaveChanges();
         }
     }
