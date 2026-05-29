@@ -1,0 +1,142 @@
+.price-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actions-container {
+  display: flex;
+  align-items: center;
+  gap: 0rem;
+}
+
+.counter-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 4rem;
+  height: 1.875rem;
+  padding: 0 0.938rem;
+  border: 0.125rem solid #d9dff2;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.04);
+  flex-shrink: 0;
+}
+
+.counter-button {
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: #1f1f1f;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.counter-button:hover {
+  transform: scale(1.15);
+  opacity: 0.8;
+}
+
+.counter-value {
+  min-width: 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111;
+}
+
+.custom-button.AddCar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.875rem;
+  padding: 0 1rem;
+  border: none;
+  background: linear-gradient(90deg, #534ab7, #7265fc);
+  color: #fff;
+  font-size: 0.813rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.15s ease;
+
+  white-space: nowrap;
+}
+
+.custom-button:hover {
+  background-color: #3c3489;
+  transform: translateY(-1px);
+}
+
+.custom-button:active {
+  transform: scale(0.98);
+}
+
+a.custom-button {
+  text-decoration: none;
+}
+
+.price {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.info {
+  width: 100%;
+  min-width: 0;
+}
+
+.custom-button.AddCar {
+  width: 100%;
+  min-width: 0;
+}
+
+.image-section {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4.5rem 1fr 4.5rem;
+  align-items: center;
+
+  width: 100%;
+}
+
+.mini-image-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-left: 0.3rem;
+  justify-self: start;
+}
+
+.mini-image {
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 0.063rem solid #d9dff2;
+  border-radius: 0.5rem;
+
+  overflow: hidden;
+  cursor: pointer;
+
+  flex-shrink: 0;
+}
+
+.mini-image img {
+  width: 100%;
+}
+
+.image-section .image {
+  height: auto;
+  justify-self: center;
+  object-fit: cover;
+}

@@ -17,7 +17,7 @@
   gap: 0.5rem;
 }
 
-.item {
+.item-content {
   width: 12.5rem;
   height: 13rem;
   padding: 0.625rem;
@@ -32,7 +32,7 @@
   flex: none;
 }
 
-.item .image {
+.item-content .item {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,12 +40,12 @@
   height: 100%;
 }
 
-.item .image img {
+.item-content .item img {
   width: 5rem;
   border-radius: 0.375rem;
 }
 
-.carousel .item .info {
+.carousel .item-content .info {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -53,14 +53,14 @@
   padding: 0.5rem 0 0 0;
 }
 
-.carousel .item .info span {
+.carousel .item-content .info span {
   display: block;
 
   text-align: center;
   border-radius: 0.375rem;
 }
 
-.carousel .item .info span.name {
+.carousel .item-content .info span.name {
   font-size: 1rem;
   font-weight: bold;
 
@@ -73,7 +73,7 @@
   overflow: hidden;
 }
 
-.carousel .item .info span.oldPrice {
+.carousel .item-content .info span.oldPrice {
   font-size: 0.8rem;
   text-decoration: line-through;
   color: #534ab7;
@@ -81,11 +81,11 @@
   margin-top: 5px;
 }
 
-.carousel .item .info span.price {
+.carousel .item-content .info span.price {
   font-size: 1.25rem;
   font-weight: bold;
 
-  background: #534ab7;
+  background: linear-gradient(90deg, #534ab7, #7265fc);
   color: #fff;
 
   margin-top: 5px;

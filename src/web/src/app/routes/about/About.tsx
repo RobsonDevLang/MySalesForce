@@ -1,9 +1,9 @@
 import { useState, type SetStateAction } from "react";
-import ButtonComponent from "../../../../src/shared/components/ButtonComponent/ButtonComponent";
-import SelectComponent from "../../../../src/shared/components/SelectComponent/SelectComponent";
-import TableComponent from "../../../../src/shared/components/TableComponent/TableComponent";
+import ButtonComponent from "@/shared/components/ButtonComponent/ButtonComponent";
+import SelectComponent from "@/shared/components/SelectComponent/SelectComponent";
+import TableComponent from "@/shared/components/TableComponent/TableComponent";
 
-function Sobre() {
+function About() {
   const [selectedOption, setSelectedOption] = useState("option1");
 
   return (
@@ -31,4 +31,4 @@ function Sobre() {
   );
 }
 
-export default Sobre;
+export default About;

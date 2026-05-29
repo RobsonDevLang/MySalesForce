@@ -1,0 +1,108 @@
+import InputComponent from "@/shared/components/InputComponent/InputComponent";
+import "./RegisterFormComponent.css";
+import PersonIcon from "@mui/icons-material/Person";
+import EmailIcon from "@mui/icons-material/Email";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import LockIcon from "@mui/icons-material/Lock";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import GoogleIcon from "@mui/icons-material/Google";
+import FacebookIcon from "@mui/icons-material/Facebook";
+
+export default function RegisterFormComponent() {
+  return (
+    <>
+      <div className="register-container">
+        <div className="register-card">
+          <h1 className="logo">MySalesForce</h1>
+
+          <h2>Crie sua conta</h2>
+
+          <p className="subtitle">Preencha os dados abaixo para começar.</p>
+
+          <form>
+            <div className="row">
+              <div className="input-group">
+                <div className="input-wrapper">
+                  <PersonIcon className="input-icon" />
+                  <InputComponent type="text" placeholder="Nome" />
+                </div>
+              </div>
+
+              <div className="input-group">
+                <div className="input-wrapper">
+                  <PersonIcon className="input-icon" />
+                  <InputComponent type="text" placeholder="Sobrenome" />
+                </div>
+              </div>
+            </div>
+
+            <div className="input-group">
+              <div className="input-wrapper">
+                <EmailIcon className="input-icon" />
+                <InputComponent type="email" placeholder="E-mail" />
+              </div>
+            </div>
+
+            <div className="input-group">
+              <div className="input-wrapper">
+                <LocalPhoneIcon className="input-icon" />
+                <InputComponent type="text" placeholder="Telefone" />
+              </div>
+            </div>
+
+            <div className="input-group">
+              <div className="input-wrapper">
+                <LockIcon className="input-icon" />
+                <InputComponent type="password" placeholder="Senha" />
+                <VisibilityIcon className="visibility-icon" />
+                <VisibilityOffIcon className="visibility-icon" />
+              </div>
+            </div>
+
+            <div className="input-group">
+              <div className="input-wrapper">
+                <LockIcon className="input-icon" />
+                <InputComponent type="password" placeholder="Confirmar senha" />
+                <VisibilityIcon className="visibility-icon" />
+                <VisibilityOffIcon className="visibility-icon" />
+              </div>
+            </div>
+
+            <label className="terms">
+              <InputComponent type="checkbox" />
+              <span>
+                Eu concordo com os
+                <a href="#"> Termos de Uso </a>e
+                <a href="#"> Política de Privacidade</a>
+              </span>
+            </label>
+
+            <button type="submit" className="btn-register">
+              Criar conta
+            </button>
+          </form>
+
+          <div className="divider">
+            <span>ou cadastre-se com</span>
+          </div>
+
+          <div className="social-buttons">
+            <button type="button">
+              <GoogleIcon className="google-icon" />
+            </button>
+
+            <button type="button">
+              <FacebookIcon className="facebook-icon" />
+            </button>
+          </div>
+
+          <p className="login-link">
+            Já tem uma conta?
+            <a href="#"> Faça login</a>
+          </p>
+        </div>
+      </div>
+    </>
+  );
+}

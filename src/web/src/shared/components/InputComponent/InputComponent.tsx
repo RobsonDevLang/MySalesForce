@@ -1,10 +1,27 @@
 import "./InputComponent.css";
 
-export default function InputComponent(props: any) {
-  const { placeholder } = props;
+type InputComponentProps = {
+  type?: React.HTMLInputTypeAttribute;
+  placeholder?: string;
+  value?: string;
+  name?: string;
+};
+
+export default function InputComponent({
+  type = "text",
+  placeholder,
+  value,
+  name,
+}: InputComponentProps) {
   return (
-    <>
-      <input className="custom-input" placeholder={placeholder}></input>
-    </>
+    <input
+      className="custom-input"
+      type={type}
+      placeholder={placeholder}
+      value={value}
+      name={name}
+      autoComplete="off"
+      readOnly={value !== undefined}
+    />
   );
 }
