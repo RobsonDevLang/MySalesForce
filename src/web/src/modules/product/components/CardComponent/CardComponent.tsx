@@ -5,7 +5,7 @@ import { useProducts } from "@/modules/product/hooks/useProduct";
 import { useFavorite } from "@/modules/product/hooks/useFavorite";
 
 export default function CardComponent() {
-  const { products, loading } = useProducts();
+  const { products } = useProducts();
 
   const { favorites, toggleFavorite, handleShare } = useFavorite();
   if (!products.length) {
