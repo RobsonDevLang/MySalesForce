@@ -1,54 +1,13 @@
-import { useEffect, useState } from "react";
 import "./CardComponent.css";
 
-import CardItem from "./CardItem";
-import type { Product } from "./types";
-import { getProducts } from "./services/productService";
+import CardItemComponent from "@/modules/product/components/CardItemComponent/CardItemComponent";
+import { useProducts } from "@/modules/product/hooks/useProduct";
+import { useFavorite } from "@/modules/product/hooks/useFavorite";
 
 export default function CardComponent() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [favorites, setFavorites] = useState<string[]>([]);
+  const { products, loading } = useProducts();
 
-  useEffect(() => {
-    loadProducts();
-  }, []);
-
-  async function loadProducts() {
-    try {
-      const data = await getProducts();
-      setProducts(data);
-    } catch (error) {
-      console.error("Erro ao buscar produtos:", error);
-    }
-  }
-
-  function toggleFavorite(id: string) {
-    setFavorites((prev) =>
-      prev.includes(id)
-        ? prev.filter((itemId) => itemId !== id)
-        : [...prev, id],
-    );
-  }
-
-  async function handleShare(product: Product) {
-    if (!navigator.share) {
-      alert("Seu navegador não suporta compartilhamento");
-      return;
-    }
-
-    try {
-      await navigator.share({
-        title: product.name,
-        text: product.description,
-        url: window.location.href,
-      });
-
-      console.log("Compartilhado com sucesso");
-    } catch (error) {
-      console.log("Erro ao compartilhar", error);
-    }
-  }
-
+  const { favorites, toggleFavorite, handleShare } = useFavorite();
   if (!products.length) {
     return <div>Loading...</div>;
   }
@@ -57,7 +16,7 @@ export default function CardComponent() {
     <div className="box">
       <div className="container-card">
         {products.map((product) => (
-          <CardItem
+          <CardItemComponent
             key={product.id}
             product={product}
             isFavorite={favorites.includes(product.id)}

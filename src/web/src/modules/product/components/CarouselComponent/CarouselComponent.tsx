@@ -37,8 +37,8 @@ export default function CarrosselComponent() {
             const { id, name, oldPrice, price, image } = item;
 
             return (
-              <div className="item" key={id}>
-                <div className="image">
+              <div className="item-content" key={id}>
+                <div className="item">
                   <img src={image} alt={name} />
 
                   <div className="info">

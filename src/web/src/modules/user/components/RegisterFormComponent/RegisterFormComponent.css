@@ -1,0 +1,231 @@
+.register-container {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 560px;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 28px;
+  padding: 45px;
+  box-shadow: 0 20px 50px rgba(94, 93, 240, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.logo {
+  text-align: center;
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 20px;
+
+  background: linear-gradient(90deg, #0066ff, #6c4cff);
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.register-card h2 {
+  text-align: center;
+  font-size: 34px;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #777;
+  margin-bottom: 35px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.row {
+  display: flex;
+  gap: 15px;
+}
+
+.row .input-group {
+  flex: 1;
+}
+
+.input-group i {
+  color: #8d8db3;
+  font-size: 16px;
+}
+
+.input-group input {
+  width: 100%;
+}
+
+.eye {
+  cursor: pointer;
+}
+
+.terms {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  color: #666;
+}
+
+.terms a {
+  text-decoration: none;
+  color: #5d4fff;
+  font-weight: 600;
+}
+
+.terms .custom-input {
+  width: auto;
+  display: inline-flex;
+}
+
+.btn-register {
+  width: 100%;
+  height: 58px;
+
+  border: none;
+  border-radius: 14px;
+
+  background: linear-gradient(90deg, #5a4dff, #6f47ff);
+
+  color: #fff;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+
+  margin-top: 10px;
+}
+
+.btn-register:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 20px rgba(93, 79, 255, 0.35);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  margin: 30px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+
+  flex: 1;
+  height: 1px;
+
+  background: #ddd;
+}
+
+.divider span {
+  color: #888;
+  font-size: 14px;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.social-buttons button {
+  width: 58px;
+  height: 58px;
+
+  border-radius: 16px;
+
+  border: 2px solid #ececff;
+
+  background: #fff;
+
+  cursor: pointer;
+
+  font-size: 20px;
+
+  transition: 0.3s;
+}
+
+.social-buttons button:hover {
+  transform: translateY(-3px);
+
+  border-color: #6c4cff;
+
+  box-shadow: 0 10px 20px rgba(93, 79, 255, 0.18);
+}
+
+.login-link {
+  text-align: center;
+
+  margin-top: 28px;
+
+  color: #666;
+}
+
+.login-link a {
+  text-decoration: none;
+  color: #5d4fff;
+  font-weight: 600;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.register-page .custom-input {
+  visibility: visible;
+  padding-left: 40px;
+}
+
+.visibility-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  cursor: pointer;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  pointer-events: none;
+}
+
+@media (max-width: 650px) {
+  .register-card {
+    padding: 30px;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+
+  .logo {
+    font-size: 34px;
+  }
+
+  .register-card h2 {
+    font-size: 28px;
+  }
+}
