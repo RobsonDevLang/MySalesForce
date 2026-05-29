@@ -1,16 +1,10 @@
-/* InputComponent.css */
-
 .custom-input {
   width: 35rem;
   padding: 0.625rem 0.9375rem;
-
   border-radius: 0.3125rem;
   border: 0.0625rem solid #2a48df;
-
   outline: none;
-
   margin: 0;
-
   box-sizing: border-box;
 }
 

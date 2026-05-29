@@ -34,12 +34,25 @@ Cada microsserviço segue o padrão:
 
 ```
 [name]-service/
-├── Controllers/      # endpoints da API (recebe requisições HTTP)
-├── DTO/              # Data Transfer Objects (representa dados de entrada/saída)
-├── Mappers/          # conversões entre DTO e Model
-├── Models/           # entidades de domínio com validações
-├── Services/         # lógica de negócio
-└── [Name].Api.csproj # projeto .NET
+├─ Configurations/                  # configurações da aplicação e mapeamentos
+├─ Controllers/                     # endpoints da API
+├─ Data/                            # contexto e acesso ao banco de dados
+├─ DTO/                             # objetos de transferência de dados
+├─ Mappers/                         # conversão entre entidades e DTOs
+├─ Migrations/                      # migrations do Entity Framework
+├─ Models/                          # entidades e modelos de domínio
+├─ Properties/                      # configurações internas do projeto
+├─ Repositories/                    # camada de acesso aos dados
+├─ Services/                        # regras de negócio
+├─ Validators/                      # validações de entrada e regras
+├─ appsettings.json                 # configurações gerais da aplicação
+├─ appsettings.Development.json     # configurações do ambiente de desenvolvimento
+├─ appsettings.Production.json      # configurações do ambiente de produção
+├─ Dockerfile                       # configuração de container Docker
+├─ flow.md                          # documentação de fluxo da aplicação
+├─ Program.cs                       # ponto de entrada da aplicação
+├─ service.http                     # testes de requisições HTTP
+└─ [name].Service.csproj            # arquivo principal do projeto .NET
 ```
 
 ### `docs/`

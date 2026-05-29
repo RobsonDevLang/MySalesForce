@@ -1,5 +1,4 @@
 body {
-  background-image: url("./assets/background.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -13,6 +12,31 @@ body {
   font-family: "Inter", sans-serif;
   font-weight: 700; /* Bold */
   letter-spacing: -0.02em; /* Para dar o efeito de logo */
+}
+
+body.bg-home,
+body.bg-about,
+body.bg-login,
+body.bg-register,
+body.bg-default {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+body.bg-home,
+body.bg-about {
+  background-image: url("./assets/background.png");
+}
+
+body.bg-login,
+body.bg-register {
+  background-image: url("./assets/background_login.png");
+}
+
+body.bg-default {
+  background-image: url("./assets/background.png");
 }
 
 .logo-style {

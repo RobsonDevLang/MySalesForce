@@ -1,7 +1,7 @@
 import { useState } from "react";
-import "./CategoriasComponent.css";
+import "./CategoryComponent.css";
 
-function CategoriasComponent() {
+function CategoryComponent() {
   const categorias = [
     "Ofertas",
     "Feminino",
@@ -34,4 +34,4 @@ function CategoriasComponent() {
     </>
   );
 }
-export default CategoriasComponent;
+export default CategoryComponent;

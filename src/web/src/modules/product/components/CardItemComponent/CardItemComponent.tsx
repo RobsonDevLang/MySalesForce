@@ -1,8 +1,8 @@
 import { IconButton } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
-import type { Product } from "./types";
-import "./CardItem.css";
+import type { Product } from "../../types/product.types";
+import "./CardItemComponent.css";
 import { useState } from "react";
 import ButtonComponent from "@/shared/components/ButtonComponent/ButtonComponent";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -14,7 +14,7 @@ interface CardItemProps {
   onShare: (product: Product) => void;
 }
 
-export default function CardItem({
+export default function CardItemComponent({
   product,
   isFavorite,
   onToggleFavorite,
@@ -24,12 +24,12 @@ export default function CardItem({
 
   const decrease = () => {
     if (value > 0) {
-      setValue(value - 1);
+      setValue((prev) => Math.max(0, prev - 1));
     }
   };
 
   const increase = () => {
-    setValue(value + 1);
+    setValue((prev) => prev + 1);
   };
 
   return (
@@ -46,7 +46,23 @@ export default function CardItem({
           <ShareIcon />
         </IconButton>
       </div>
-      <img className="image" src={product.image} alt={product.name} />
+      <div className="image-section">
+        <div className="mini-image-container">
+          <div className="mini-image">
+            <img src={product.image} alt={product.name} />
+          </div>
+
+          <div className="mini-image">
+            <img src={product.image} alt={product.name} />
+          </div>
+
+          <div className="mini-image">
+            <img src={product.image} alt={product.name} />
+          </div>
+        </div>
+
+        <img className="image" src={product.image} alt={product.name} />
+      </div>
       <div className="info">
         <p className="description">{product.description}</p>
         <div className="price-container">

@@ -1,5 +1,5 @@
 .custom-button {
-  background-color: #534ab7;
+  background: linear-gradient(90deg, #5a4dff, #6f47ff);
   color: white;
   padding: 10px 15px;
   border: none;
@@ -10,8 +10,10 @@
 }
 
 .custom-button:hover {
-  background-color: #3c3489;
   color: white;
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 20px rgba(93, 79, 255, 0.15);
 }
 
 a.custom-button {
