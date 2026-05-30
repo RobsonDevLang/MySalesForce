@@ -17,5 +17,6 @@ namespace Product.DTO
         public int ConditionalId {get; set;}
         public int CategoryId { get; set;}
         public int MarkId {get; set;}
+        public List<string> Sizes { get; set; } = new();
     }
 }

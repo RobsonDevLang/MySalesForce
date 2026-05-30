@@ -16,10 +16,32 @@ CREATE TABLE condicao(
 	name VARCHAR(255) not NULL
 );
 
-CREATE TABLE categoria(
+CREATE TABLE category(
 	id INT GENERATED ALWAYS AS IDENTITY,
 	constraint pk_categoria primary key (id),
 	name VARCHAR(255) not NULL
+);
+
+CREATE TABLE size (
+    id INT GENERATED ALWAYS AS IDENTITY,
+    size VARCHAR(255) NOT NULL,
+    CONSTRAINT pk_size PRIMARY KEY (id)
+);
+
+CREATE TABLE product_size (
+    product_id INT NOT NULL,
+    size_id INT NOT NULL,
+
+    CONSTRAINT pk_product_size
+        PRIMARY KEY (product_id, size_id),
+
+    CONSTRAINT fk_product_size_product
+        FOREIGN KEY (product_id)
+        REFERENCES product(id),
+
+    CONSTRAINT fk_product_size_size
+        FOREIGN KEY (size_id)
+        REFERENCES size(id)
 );
 
 CREATE TABLE marca(

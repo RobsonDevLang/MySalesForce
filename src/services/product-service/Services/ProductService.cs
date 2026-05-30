@@ -1,3 +1,4 @@
+using Product.DTO;
 using Product.Models;
 using Product.Repositories;
 
@@ -14,6 +15,9 @@ namespace Product.Services
 
         public IReadOnlyList<ProductModel> GetAll() =>
             _repository.GetAll();
+
+        public IReadOnlyList<ProductDto> GetAllActive() =>
+            _repository.GetAllActive();
 
         public ProductModel? GetById(int id) =>
             _repository.GetById(id);
