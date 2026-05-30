@@ -39,7 +39,7 @@ namespace Product.Mappers
                 ShortName = model.ShortName,
                 ConditionalId = model.ConditionalId,
                 CategoryId = model.CategoryId,
-                MarkId = model.MarkId
+                MarkId = model.MarkId,
             };
         }
     }

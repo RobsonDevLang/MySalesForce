@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace product_service.Migrations
+namespace Product.Migrations
 {
     /// <inheritdoc />
     public partial class ProductCreate : Migration
@@ -34,6 +34,19 @@ namespace product_service.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_product", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "size",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    size = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_size", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -81,14 +94,33 @@ namespace product_service.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "product_size",
+                columns: table => new
+                {
+                    product_id = table.Column<int>(type: "integer", nullable: false),
+                    size_id = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_product_size", x => new { x.product_id, x.size_id });
+                    table.ForeignKey(
+                        name: "fk_product_size_product_product_id",
+                        column: x => x.product_id,
+                        principalTable: "product",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_product_size_size_size_id",
+                        column: x => x.size_id,
+                        principalTable: "size",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "ix_historical_price_model_product_id",
                 table: "historical_price_model",
-                column: "product_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_product_image_model_product_id",
-                table: "product_image_model",
                 column: "product_id");
 
             migrationBuilder.CreateIndex(
@@ -96,6 +128,16 @@ namespace product_service.Migrations
                 table: "product",
                 column: "code",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "ix_product_image_model_product_id",
+                table: "product_image_model",
+                column: "product_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_product_size_size_id",
+                table: "product_size",
+                column: "size_id");
         }
 
         /// <inheritdoc />
@@ -108,7 +150,13 @@ namespace product_service.Migrations
                 name: "product_image_model");
 
             migrationBuilder.DropTable(
+                name: "product_size");
+
+            migrationBuilder.DropTable(
                 name: "product");
+
+            migrationBuilder.DropTable(
+                name: "size");
         }
     }
 }

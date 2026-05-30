@@ -9,10 +9,10 @@ using Product.Data;
 
 #nullable disable
 
-namespace product_service.Migrations
+namespace Product.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20260527065903_ProductCreate")]
+    [Migration("20260530190047_ProductCreate")]
     partial class ProductCreate
     {
         /// <inheritdoc />
@@ -133,6 +133,25 @@ namespace product_service.Migrations
                     b.ToTable("product", (string)null);
                 });
 
+            modelBuilder.Entity("Product.Models.ProductSizeModel", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer")
+                        .HasColumnName("product_id");
+
+                    b.Property<int>("SizeId")
+                        .HasColumnType("integer")
+                        .HasColumnName("size_id");
+
+                    b.HasKey("ProductId", "SizeId")
+                        .HasName("pk_product_size");
+
+                    b.HasIndex("SizeId")
+                        .HasDatabaseName("ix_product_size_size_id");
+
+                    b.ToTable("product_size", (string)null);
+                });
+
             modelBuilder.Entity("ProductImage.Models.ProductImageModel", b =>
                 {
                     b.Property<int>("Id")
@@ -174,6 +193,27 @@ namespace product_service.Migrations
                     b.ToTable("product_image_model", (string)null);
                 });
 
+            modelBuilder.Entity("Size.Models.SizeModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Size")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("size");
+
+                    b.HasKey("Id")
+                        .HasName("pk_size");
+
+                    b.ToTable("size", (string)null);
+                });
+
             modelBuilder.Entity("HistoricalPrice.Models.HistoricalPriceModel", b =>
                 {
                     b.HasOne("Product.Models.ProductModel", "Product")
@@ -186,10 +226,31 @@ namespace product_service.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Product.Models.ProductSizeModel", b =>
+                {
+                    b.HasOne("Product.Models.ProductModel", "Product")
+                        .WithMany("ProductSizes")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_product_size_product_product_id");
+
+                    b.HasOne("Size.Models.SizeModel", "Size")
+                        .WithMany()
+                        .HasForeignKey("SizeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_product_size_size_size_id");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Size");
+                });
+
             modelBuilder.Entity("ProductImage.Models.ProductImageModel", b =>
                 {
                     b.HasOne("Product.Models.ProductModel", "Product")
-                        .WithMany("Images")
+                        .WithMany("ProductImages")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
@@ -202,7 +263,9 @@ namespace product_service.Migrations
                 {
                     b.Navigation("HistoricalPrices");
 
-                    b.Navigation("Images");
+                    b.Navigation("ProductImages");
+
+                    b.Navigation("ProductSizes");
                 });
 #pragma warning restore 612, 618
         }
