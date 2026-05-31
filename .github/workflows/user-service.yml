@@ -1,0 +1,20 @@
+name: User Service
+
+on:
+  push:
+    branches: [ "master" ]
+    paths:
+      - 'src/services/user-service/**'
+
+  pull_request:
+    branches: [ "master" ]
+    paths:
+      - 'src/services/user-service/**'
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: ./.github/workflows/dotnet.yml
+    with:
+      service-path: ./src/services/user-service
