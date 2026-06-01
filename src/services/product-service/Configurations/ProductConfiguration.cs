@@ -15,7 +15,7 @@ namespace Product.Configurations
                 .HasMaxLength(255);
 
             builder.Property(p => p.Description)
-                .HasMaxLength(500);
+                .HasColumnType("text");
 
             builder.Property(p => p.Weight)
                 .HasColumnType("decimal(10,2)");
@@ -27,10 +27,15 @@ namespace Product.Configurations
                 .HasColumnType("decimal(10,2)");
 
             builder.Property(p => p.Observation)
-                .HasMaxLength(500);
+                .HasColumnType("text");
 
             builder.Property(p => p.ShortName)
                 .HasMaxLength(100);
+
+            // Configurações adicionais, como relacionamentos, chaves estrangeiras, etc.  
+           builder.HasOne(p => p.Category)
+                .WithMany(c => c.Products)
+                .HasForeignKey(p => p.CategoryId);
         }
         
     }

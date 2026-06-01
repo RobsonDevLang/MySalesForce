@@ -19,7 +19,7 @@ namespace Product.Mappers
                 Observation = dto.Observation,
                 ShortName = dto.ShortName,
                 ConditionalId = dto.ConditionalId,
-                CategoryId = dto.CategoryId,
+                Category = dto.Category != null ? new CategoryModel { Name = dto.Category } : null!,
                 MarkId = dto.MarkId
             };
         }
@@ -38,7 +38,7 @@ namespace Product.Mappers
                 Observation = model.Observation,
                 ShortName = model.ShortName,
                 ConditionalId = model.ConditionalId,
-                CategoryId = model.CategoryId,
+                Category = model.Category?.Name ?? string.Empty,
                 MarkId = model.MarkId,
             };
         }

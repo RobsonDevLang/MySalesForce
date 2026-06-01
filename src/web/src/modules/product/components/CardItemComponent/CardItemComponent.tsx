@@ -41,32 +41,30 @@ export default function CardItemComponent({
         >
           <FavoriteIcon className={isFavorite ? "active" : ""} />
         </IconButton>
-        <h2 className="name">{product.name}</h2>
+        <h2 className="name">{product.shortName ?? product.name }</h2>
         <IconButton aria-label="compartilhar" onClick={() => onShare(product)}>
           <ShareIcon />
         </IconButton>
       </div>
       <div className="image-section">
-        <div className="mini-image-container">
-          <div className="mini-image">
-            <img src={product.image} alt={product.name} />
+      <div className="mini-image-container">
+        {product.images.slice(1, 5).map((image, index) => (
+          <div key={index} className="mini-image">
+            <img src={image.url} alt={image.altText} />
           </div>
+        ))}
+      </div>
 
-          <div className="mini-image">
-            <img src={product.image} alt={product.name} />
-          </div>
-
-          <div className="mini-image">
-            <img src={product.image} alt={product.name} />
-          </div>
-        </div>
-
-        <img className="image" src={product.image} alt={product.name} />
+        <img className="image" src={product.images[0].url} alt={product.images[0].altText} />
       </div>
       <div className="info">
-        <p className="description">{product.description}</p>
+        <p
+          className="description"
+          dangerouslySetInnerHTML={{ __html: product.description }}
+        />
         <div className="price-container">
-          <span className="price">R$ {product.price}</span>
+          <span className="price">R$ {product.historicalPrices[0].price.toFixed(2)}</span>
+          
 
           <div className="actions-container">
             <div className="counter-container">

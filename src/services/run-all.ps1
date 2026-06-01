@@ -3,7 +3,7 @@
 # Start-Process powershell "-NoExit", "dotnet watch run --project sales-service/sales.csproj"
 
 $services = @(
-    @{ Name = "Users Service"; Project = "users-service/Users.Api.csproj" }
+    @{ Name = "Users Service"; Project = "users-service/Users.Service.csproj" }
     # @{ Name = "Sales Service"; Project = "sales-service/Sales.Api.csproj" }
 )
 

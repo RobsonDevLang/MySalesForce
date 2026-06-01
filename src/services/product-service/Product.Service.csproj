@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Product</RootNamespace>
     <AssemblyName>Product.Service</AssemblyName>
+    <UserSecretsId>3b95c51c-6422-4c8f-8f3b-76dde86b4c9d</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

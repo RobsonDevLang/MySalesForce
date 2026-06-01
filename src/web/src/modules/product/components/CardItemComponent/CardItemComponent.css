@@ -136,7 +136,8 @@ a.custom-button {
 }
 
 .image-section .image {
-  height: auto;
+  height: 13.875rem;
+  width: 8.5rem;
   justify-self: center;
   object-fit: cover;
 }

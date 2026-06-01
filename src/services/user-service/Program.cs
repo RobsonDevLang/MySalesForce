@@ -14,7 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddDbContext<ApplicationDbContext>(options => 
+builder.Services.AddDbContext<UserDbContext>(options => 
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
            .UseSnakeCaseNamingConvention());
 
@@ -47,6 +47,14 @@ app.UseCors("AllowFrontend");
     app.UseSwaggerUI(); // Abre a UI na rota /swagger/index.html
 // }
 
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider
+        .GetRequiredService<UserDbContext>();
+
+    db.Database.Migrate();
+}
 // app.UseHttpsRedirection();
 
 app.MapControllers();

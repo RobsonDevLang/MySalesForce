@@ -1,5 +1,8 @@
 <Solution>
+  <Folder Name="/product-service/">
+    <Project Path="product-service/Product.Service.csproj" />
+  </Folder>
   <Folder Name="/users-service/">
-    <Project Path="users-service/Users.Api.csproj" />
+    <Project Path="users-service/Users.Service.csproj" />
   </Folder>
 </Solution>
