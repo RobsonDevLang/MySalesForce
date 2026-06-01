@@ -1,6 +1,5 @@
 using Product.Data;
 using Product.Repositories;
-using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
 using Product.Services;
 
@@ -21,17 +20,40 @@ builder.Services.AddDbContext<ProductDbContext>(options =>
 
 var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins(allowedOrigins ?? [])
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 
+
+
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+app.UseCors("AllowFrontend");
+
+// Configure the HTTP request pipeline.
+// if (app.Environment.IsDevelopment())
+// {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(); // Abre a UI na rota /swagger/index.html
+// }
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider
+        .GetRequiredService<ProductDbContext>();
+
+    db.Database.Migrate();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.MapControllers();
 

@@ -30,6 +30,7 @@ namespace Product.Repositories
                 .Where(p => p.Status == 1)
                 .Select(p => new ProductDto
                 {
+                    Id = p.Id,
                     Code = p.Code,
                     Name = p.Name,
                     Description = p.Description,
@@ -40,11 +41,29 @@ namespace Product.Repositories
                     Observation = p.Observation,
                     ShortName = p.ShortName,
                     ConditionalId = p.ConditionalId,
-                    CategoryId = p.CategoryId,
                     MarkId = p.MarkId,
+                    Category = p.Category.Name,
                     Sizes = p.ProductSizes
-                .Select(ps => ps.Size.Size)
-                        .ToList()
+                    .Select(ps => ps.Size.Size)
+                            .ToList(),
+                    Images = p.ProductImages
+                    .Select(pi => new ProductImageDto
+                    {
+                        Url = pi.Url,
+                        MainImage = pi.MainImage,
+                        AltText = pi.AltText
+                    })
+                    .ToList(),
+                    HistoricalPrices = p.ProductHistoricalPrices
+                    .Where(hp => hp.EndDate == null)
+                    .Select(pi => new ProductHistoricalPriceDto
+                    {
+                        Price = pi.Price,
+                        StartDate = pi.StartDate,
+                        EndDate = pi.EndDate
+                    })
+                    .ToList(),
+                     
                 })
                 .ToList()
                 .AsReadOnly();

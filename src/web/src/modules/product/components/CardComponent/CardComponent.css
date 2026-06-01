@@ -43,28 +43,39 @@
 }
 
 .description {
-  max-height: 2.5rem;
+  max-height: calc(2.5rem + 4px);
   overflow: hidden;
   margin: 0.438rem 2px 2px 2px;
   font-size: 0.688rem;
   color: #666;
   transition: all 0.3s ease;
+  padding: 4px;
 }
 
 .description:hover {
   max-height: 200px;
-  overflow: visible;
+  overflow: hidden;
 
   -webkit-line-clamp: unset;
 
   background-color: white;
   border-radius: 6px;
-  padding: 4px;
+  padding: 4px 4px 0px 0px;
 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 
   position: relative;
   z-index: 10;
+}
+
+.description ul {
+  margin: 0;
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
+
+.description li {
+  margin-bottom: 4px;
 }
 
 @media (max-width: 1024px) {
