@@ -43,7 +43,7 @@ Este documento explica como o serviço de usuários foi estruturado e o motivo d
                                 ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                      Data Layer                                  │
-│                  (ApplicationDbContext.cs)                       │
+│                  (UserDbContext.cs)                       │
 │  - Mapeamento ORM com Entity Framework                           │
 │  - Comunicação com o banco de dados                              │
 └─────────────────────────────────────────────────────────────────┘
@@ -193,7 +193,7 @@ public IReadOnlyList<UserModel> GetAll()
 
 ---
 
-### 7. DbContext (`ApplicationDbContext.cs`)
+### 7. DbContext (`UserDbContext.cs`)
 
 **Responsabilidade:** Mapeamento ORM e comunicação com o banco de dados.
 

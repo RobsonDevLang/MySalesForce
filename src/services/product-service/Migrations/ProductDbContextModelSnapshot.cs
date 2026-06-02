@@ -8,7 +8,7 @@ using Product.Data;
 
 #nullable disable
 
-namespace product_service.Migrations
+namespace Product.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
     partial class ProductDbContextModelSnapshot : ModelSnapshot
@@ -22,7 +22,7 @@ namespace product_service.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("HistoricalPrice.Models.HistoricalPriceModel", b =>
+            modelBuilder.Entity("HistoricalPrice.Models.ProductHistoricalPriceModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -31,7 +31,7 @@ namespace product_service.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("end_date");
 
@@ -48,12 +48,32 @@ namespace product_service.Migrations
                         .HasColumnName("start_date");
 
                     b.HasKey("Id")
-                        .HasName("pk_historical_price_model");
+                        .HasName("pk_historical_price");
 
                     b.HasIndex("ProductId")
-                        .HasDatabaseName("ix_historical_price_model_product_id");
+                        .HasDatabaseName("ix_historical_price_product_id");
 
-                    b.ToTable("historical_price_model", (string)null);
+                    b.ToTable("historical_price", (string)null);
+                });
+
+            modelBuilder.Entity("Product.Models.CategoryModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id")
+                        .HasName("pk_category");
+
+                    b.ToTable("category", (string)null);
                 });
 
             modelBuilder.Entity("Product.Models.ProductModel", b =>
@@ -80,8 +100,7 @@ namespace product_service.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)")
+                        .HasColumnType("text")
                         .HasColumnName("description");
 
                     b.Property<decimal>("Height")
@@ -99,8 +118,7 @@ namespace product_service.Migrations
                         .HasColumnName("name");
 
                     b.Property<string>("Observation")
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)")
+                        .HasColumnType("text")
                         .HasColumnName("observation");
 
                     b.Property<string>("ShortName")
@@ -123,11 +141,33 @@ namespace product_service.Migrations
                     b.HasKey("Id")
                         .HasName("pk_product");
 
+                    b.HasIndex("CategoryId")
+                        .HasDatabaseName("ix_product_category_id");
+
                     b.HasIndex("Code")
                         .IsUnique()
                         .HasDatabaseName("ix_product_code");
 
                     b.ToTable("product", (string)null);
+                });
+
+            modelBuilder.Entity("Product.Models.ProductSizeModel", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer")
+                        .HasColumnName("product_id");
+
+                    b.Property<int>("SizeId")
+                        .HasColumnType("integer")
+                        .HasColumnName("size_id");
+
+                    b.HasKey("ProductId", "SizeId")
+                        .HasName("pk_product_size");
+
+                    b.HasIndex("SizeId")
+                        .HasDatabaseName("ix_product_size_size_id");
+
+                    b.ToTable("product_size", (string)null);
                 });
 
             modelBuilder.Entity("ProductImage.Models.ProductImageModel", b =>
@@ -144,9 +184,8 @@ namespace product_service.Migrations
                         .HasColumnType("text")
                         .HasColumnName("alt_text");
 
-                    b.Property<string>("MainImage")
-                        .IsRequired()
-                        .HasColumnType("text")
+                    b.Property<bool>("MainImage")
+                        .HasColumnType("boolean")
                         .HasColumnName("main_image");
 
                     b.Property<int>("Order")
@@ -163,43 +202,104 @@ namespace product_service.Migrations
                         .HasColumnName("url");
 
                     b.HasKey("Id")
-                        .HasName("pk_product_image_model");
+                        .HasName("pk_product_image");
 
                     b.HasIndex("ProductId")
-                        .HasDatabaseName("ix_product_image_model_product_id");
+                        .HasDatabaseName("ix_product_image_product_id");
 
-                    b.ToTable("product_image_model", (string)null);
+                    b.ToTable("product_image", (string)null);
                 });
 
-            modelBuilder.Entity("HistoricalPrice.Models.HistoricalPriceModel", b =>
+            modelBuilder.Entity("Size.Models.SizeModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Size")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("size");
+
+                    b.HasKey("Id")
+                        .HasName("pk_size");
+
+                    b.ToTable("size", (string)null);
+                });
+
+            modelBuilder.Entity("HistoricalPrice.Models.ProductHistoricalPriceModel", b =>
                 {
                     b.HasOne("Product.Models.ProductModel", "Product")
-                        .WithMany("HistoricalPrices")
+                        .WithMany("ProductHistoricalPrices")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_historical_price_model_product_product_id");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("ProductImage.Models.ProductImageModel", b =>
-                {
-                    b.HasOne("Product.Models.ProductModel", "Product")
-                        .WithMany("Images")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_product_image_model_product_product_id");
+                        .HasConstraintName("fk_historical_price_product_product_id");
 
                     b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Product.Models.ProductModel", b =>
                 {
-                    b.Navigation("HistoricalPrices");
+                    b.HasOne("Product.Models.CategoryModel", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_product_category_category_id");
 
-                    b.Navigation("Images");
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Product.Models.ProductSizeModel", b =>
+                {
+                    b.HasOne("Product.Models.ProductModel", "Product")
+                        .WithMany("ProductSizes")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_product_size_product_product_id");
+
+                    b.HasOne("Size.Models.SizeModel", "Size")
+                        .WithMany()
+                        .HasForeignKey("SizeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_product_size_size_size_id");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Size");
+                });
+
+            modelBuilder.Entity("ProductImage.Models.ProductImageModel", b =>
+                {
+                    b.HasOne("Product.Models.ProductModel", "Product")
+                        .WithMany("ProductImages")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_product_image_product_product_id");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Product.Models.CategoryModel", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Product.Models.ProductModel", b =>
+                {
+                    b.Navigation("ProductHistoricalPrices");
+
+                    b.Navigation("ProductImages");
+
+                    b.Navigation("ProductSizes");
                 });
 #pragma warning restore 612, 618
         }

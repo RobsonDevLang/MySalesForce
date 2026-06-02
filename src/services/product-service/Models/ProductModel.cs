@@ -5,6 +5,7 @@ using HistoricalPrice.Models;
 // using Mark.Models;
 // using Category.Models;
 // using Conditional.Models;
+using Size.Models;
 
 namespace Product.Models
 {
@@ -28,12 +29,13 @@ namespace Product.Models
 
 // Navigation Properties
 //        public Conditional Conditional {get; set;} = null!;
-//        public Category Category {get; set;} = null!;
+       public CategoryModel Category { get; set; } = null!;
 //        public Mark Mark {get; set;} = null!;
 
 // Relationships
+        public List<ProductSizeModel> ProductSizes { get; set; } = new();
         public List<ProductImageModel> ProductImages {get; set;} = new();
-        public List<HistoricalPriceModel> HistoricalPrices {get; set;} = new();
+        public List<ProductHistoricalPriceModel> ProductHistoricalPrices {get; set;} = new();
 //        public List<StockProduct> StokProducts {get; set;} = new();
 
     }

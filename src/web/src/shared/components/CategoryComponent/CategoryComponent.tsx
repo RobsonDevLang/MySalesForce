@@ -1,9 +1,13 @@
-import { useState } from "react";
 import "./CategoryComponent.css";
 
-function CategoryComponent() {
+interface CategoriasProps {
+  categoriaAtiva: string;
+  onCategoriaChange: (cat: string) => void;
+}
+
+function CategoryComponent({ categoriaAtiva, onCategoriaChange }: CategoriasProps) {
   const categorias = [
-    "Ofertas",
+    "Todos",
     "Feminino",
     "Masculino",
     "Inverno",
@@ -12,25 +16,23 @@ function CategoryComponent() {
     "Acessórios",
   ];
 
-  const [ativa, setAtiva] = useState("Ofertas");
-
   return (
     <>
-      <nav className="categorias-container">
-        <div className="catetegory-center">
-          <ul className="categorias-list">
-            {categorias.map((cat) => (
-              <li
-                key={cat}
-                className={`categoria-item ${ativa === cat ? "active" : ""}`}
-                onClick={() => setAtiva(cat)}
-              >
-                {cat}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
+       <nav className="categorias-container">
+      <div className="catetegory-center">
+        <ul className="categorias-list">
+          {categorias.map((cat) => (
+            <li
+              key={cat}
+              className={`categoria-item ${categoriaAtiva === cat ? "active" : ""}`}
+              onClick={() => onCategoriaChange(cat)}
+            >
+              {cat}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
     </>
   );
 }

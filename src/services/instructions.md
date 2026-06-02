@@ -64,7 +64,7 @@ cd src\services
 
 ```powershell
 $services = @(
-    @{ Name = "Users Service"; Project = "users-service/Users.Api.csproj" }
+    @{ Name = "Users Service"; Project = "users-service/Users.Service.csproj" }
     # @{ Name = "Sales Service"; Project = "sales-service/Sales.Api.csproj" }
 )
 ```
