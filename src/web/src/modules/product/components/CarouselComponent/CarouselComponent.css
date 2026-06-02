@@ -7,7 +7,7 @@
 }
 
 .carousel {
-  width: calc(100% - 7rem);
+  width: calc(100% - 6rem);
 
   display: flex;
   overflow-x: auto;
@@ -125,4 +125,75 @@
 .scroll-left img,
 .scroll-right img {
   width: 1.5rem;
+}
+
+@media (width: 344px) {
+  .carousel {
+    width: calc(100% - 7.8rem);
+  }
+}
+@media (width: 360px) {
+  .carousel {
+    width: calc(100% - 8.65rem);
+  }
+}
+@media (width: 375px) {
+  .carousel {
+    width: calc(100% - 9.5rem);
+  }
+}
+@media (width: 390px) {
+  .carousel {
+    width: calc(100% - 10.65rem);
+  }
+}
+@media (width: 412px) {
+  .carousel {
+    width: calc(100% - 11.65rem);
+  }
+}
+@media (width: 414px) {
+  .carousel {
+    width: calc(100% - 11.65rem);
+  }
+}
+@media (width: 430px) {
+  .carousel {
+    width: calc(100% - 12.65rem);
+  }
+}
+@media (width: 540px) {
+  .carousel {
+    width: calc(100% - 5.8rem);
+  }
+}
+@media (width: 768px) {
+  .carousel {
+    width: calc(100% - 5.65rem);
+  }
+}
+@media (width: 820px) {
+  .carousel {
+    width: calc(100% - 8.65rem);
+  }
+}
+@media (width: 853px) {
+  .carousel {
+    width: calc(100% - 10.8rem);
+  }
+}
+@media (width: 912px) {
+  .carousel {
+    width: calc(100% - 14.5rem);
+  }
+}
+@media (width: 1024px) {
+  .carousel {
+    width: calc(100% - 7rem);
+  }
+}
+@media (width: 1280px) {
+  .carousel {
+    width: calc(100% - 8.8rem);
+  }
 }
