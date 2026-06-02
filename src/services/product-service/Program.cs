@@ -31,7 +31,11 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddResponseCompression();
+
 var app = builder.Build();
+
+app.UseResponseCompression();
 
 
 
