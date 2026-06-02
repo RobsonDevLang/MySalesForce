@@ -24,9 +24,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins(allowedOrigins ?? [])
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+        policy
+            .SetIsOriginAllowed(_ => true)
+            .AllowAnyHeader()
+            .AllowAnyMethod();
     });
 });
 
@@ -34,10 +35,10 @@ var app = builder.Build();
 
 
 
-
+app.UseRouting();
 // Configure the HTTP request pipeline.
 app.UseCors("AllowFrontend");
-
+app.UseAuthorization();
 // Configure the HTTP request pipeline.
 // if (app.Environment.IsDevelopment())
 // {
