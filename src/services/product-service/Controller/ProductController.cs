@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Product.Services;
+using Product.Mappers;
+using Product.DTO;
 
 namespace Product.Controller
 {
@@ -27,6 +29,22 @@ namespace Product.Controller
         public IActionResult GetAllActive()
         {
             return Ok(_service.GetAllActive());
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+           var product = _service.GetById(id);
+           if (product == null) return NotFound();
+           return Ok(product);
+        }
+
+        [HttpPost]
+        public IActionResult Create(ProductDto dto)
+        {
+           var model = ProductMapper.ParaModel(dto);
+           var created = _service.Add(model);
+           return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
     }
 }
