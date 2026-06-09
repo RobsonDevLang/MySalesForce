@@ -24,19 +24,19 @@ jobs:
           dotnet-version: '10.x'
 
       - name: Build with dotnet
-        run: dotnet build src/services/product-service/product-service.csproj --configuration Release
+        run: dotnet build src/services/product-service/Product.Service.csproj --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish src/services/product-service/product-service.csproj --configuration Release --output "${{env.DOTNET_ROOT}}/myapp"
+        run: dotnet publish src/services/product-service/Product.Service.csproj --configuration Release --output "${{env.DOTNET_ROOT}}/myapp"
 
       - name: Restore dependencies
-        run: dotnet restore src/services/product-service/product-service.csproj
+        run: dotnet restore src/services/product-service/Product.Service.csproj
       
       - name: Build with dotnet
-        run: dotnet build src/services/product-service/product-service.csproj --configuration Release --no-restore
+        run: dotnet build src/services/product-service/Product.Service.csproj --configuration Release --no-restore
       
       - name: dotnet publish
-        run: dotnet publish src/services/product-service/product-service.csproj --configuration Release --no-build --output "${{env.DOTNET_ROOT}}/myapp"
+        run: dotnet publish src/services/product-service/Product.Service.csproj --configuration Release --no-build --output "${{env.DOTNET_ROOT}}/myapp"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
