@@ -2,11 +2,11 @@
 
 ## Visão do projeto
 
-Desenvolver uma plataforma moderna e escalável que una E-commerce, CRM e Marketing em um único ecossistema, permitindo gerenciar vendas, clientes, relacionamento e campanhas de forma integrada. O projeto terá como foco aplicar, na prática, as tecnologias mais valorizadas pelo mercado, evoluindo de fundamentos até recursos avançados, com atenção especial a segurança, LGPD, rastreabilidade de dados, integrações e arquitetura robusta.
+Desenvolver uma plataforma moderna e escalável que una E-commerce, CRM e Brandeting em um único ecossistema, permitindo gerenciar vendas, clientes, relacionamento e campanhas de forma integrada. O projeto terá como foco aplicar, na prática, as tecnologias mais valorizadas pelo mercado, evoluindo de fundamentos até recursos avançados, com atenção especial a segurança, LGPD, rastreabilidade de dados, integrações e arquitetura robusta.
 
 ## Pilares do projeto
 
-Integração de módulos: E-commerce, CRM e possivelmente Marketing no mesmo ambiente.
+Integração de módulos: E-commerce, CRM e possivelmente Brandeting no mesmo ambiente.
 Arquitetura robusta: foco em escalabilidade, organização e manutenção.
 Segurança e conformidade: autenticação, autorização, proteção de dados e LGPD.
 Rastreabilidade de dados: auditoria, logs, histórico de alterações e observabilidade.

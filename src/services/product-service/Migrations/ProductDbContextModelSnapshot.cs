@@ -17,7 +17,7 @@ namespace Product.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.8")
+                .HasAnnotation("ProductVersion", "10.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -56,6 +56,26 @@ namespace Product.Migrations
                     b.ToTable("historical_price", (string)null);
                 });
 
+            modelBuilder.Entity("Product.Models.BrandModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id")
+                        .HasName("pk_brand");
+
+                    b.ToTable("brand", (string)null);
+                });
+
             modelBuilder.Entity("Product.Models.CategoryModel", b =>
                 {
                     b.Property<int>("Id")
@@ -85,6 +105,10 @@ namespace Product.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("BrandId")
+                        .HasColumnType("integer")
+                        .HasColumnName("brand_id");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer")
                         .HasColumnName("category_id");
@@ -106,10 +130,6 @@ namespace Product.Migrations
                     b.Property<decimal>("Height")
                         .HasColumnType("decimal(10,2)")
                         .HasColumnName("height");
-
-                    b.Property<int>("MarkId")
-                        .HasColumnType("integer")
-                        .HasColumnName("mark_id");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -140,6 +160,9 @@ namespace Product.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_product");
+
+                    b.HasIndex("BrandId")
+                        .HasDatabaseName("ix_product_brand_id");
 
                     b.HasIndex("CategoryId")
                         .HasDatabaseName("ix_product_category_id");
@@ -245,12 +268,21 @@ namespace Product.Migrations
 
             modelBuilder.Entity("Product.Models.ProductModel", b =>
                 {
+                    b.HasOne("Product.Models.BrandModel", "Brand")
+                        .WithMany("Products")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_product_brand_brand_id");
+
                     b.HasOne("Product.Models.CategoryModel", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_product_category_category_id");
+
+                    b.Navigation("Brand");
 
                     b.Navigation("Category");
                 });
@@ -286,6 +318,11 @@ namespace Product.Migrations
                         .HasConstraintName("fk_product_image_product_product_id");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Product.Models.BrandModel", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Product.Models.CategoryModel", b =>

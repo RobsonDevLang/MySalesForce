@@ -7,11 +7,24 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Product.Migrations
 {
     /// <inheritdoc />
-    public partial class initialDataBase : Migration
+    public partial class initialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "brand",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    name = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_brand", x => x.id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "category",
                 columns: table => new
@@ -55,11 +68,17 @@ namespace Product.Migrations
                     short_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     conditional_id = table.Column<int>(type: "integer", nullable: false),
                     category_id = table.Column<int>(type: "integer", nullable: false),
-                    mark_id = table.Column<int>(type: "integer", nullable: false)
+                    brand_id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_product", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_product_brand_brand_id",
+                        column: x => x.brand_id,
+                        principalTable: "brand",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_product_category_category_id",
                         column: x => x.category_id,
@@ -143,6 +162,11 @@ namespace Product.Migrations
                 column: "product_id");
 
             migrationBuilder.CreateIndex(
+                name: "ix_product_brand_id",
+                table: "product",
+                column: "brand_id");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_product_category_id",
                 table: "product",
                 column: "category_id");
@@ -181,6 +205,9 @@ namespace Product.Migrations
 
             migrationBuilder.DropTable(
                 name: "size");
+
+            migrationBuilder.DropTable(
+                name: "brand");
 
             migrationBuilder.DropTable(
                 name: "category");

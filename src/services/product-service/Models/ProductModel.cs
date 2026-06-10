@@ -1,10 +1,6 @@
 
-// using Product.Validators;
 using ProductImage.Models;
 using HistoricalPrice.Models;
-// using Mark.Models;
-// using Category.Models;
-// using Conditional.Models;
 using Size.Models;
 
 namespace Product.Models
@@ -25,18 +21,16 @@ namespace Product.Models
 // Foreing Keys
         public int ConditionalId {get; set;}
         public int CategoryId { get; set;}
-        public int MarkId {get; set;}
+        public int BrandId {get; set;}
 
 // Navigation Properties
-//        public Conditional Conditional {get; set;} = null!;
-       public CategoryModel Category { get; set; } = null!;
-//        public Mark Mark {get; set;} = null!;
+        public BrandModel Brand { get; set; } = null!;
+        public CategoryModel Category { get; set; } = null!;
 
 // Relationships
         public List<ProductSizeModel> ProductSizes { get; set; } = new();
         public List<ProductImageModel> ProductImages {get; set;} = new();
         public List<ProductHistoricalPriceModel> ProductHistoricalPrices {get; set;} = new();
-//        public List<StockProduct> StokProducts {get; set;} = new();
 
     }
 }

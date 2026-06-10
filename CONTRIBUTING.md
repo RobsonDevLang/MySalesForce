@@ -31,7 +31,7 @@
  <li>Queries e integrações com API
 </ul>
 
-## 🎨 @luizagiovana⁩ — Frontend + Dados + Planejamento
+## 🎨 @luizagiovana — Frontend + Dados + Planejamento
 <ul>
  <li>Frontend (React)
  <li>Integração com APIs

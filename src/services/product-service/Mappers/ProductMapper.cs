@@ -20,7 +20,7 @@ namespace Product.Mappers
                 ShortName = dto.ShortName,
                 ConditionalId = dto.ConditionalId,
                 Category = dto.Category != null ? new CategoryModel { Name = dto.Category } : null!,
-                MarkId = dto.MarkId
+                Brand = dto.Brand != null ? new BrandModel { Name = dto.Brand } : null!,
             };
         }
 
@@ -39,7 +39,7 @@ namespace Product.Mappers
                 ShortName = model.ShortName,
                 ConditionalId = model.ConditionalId,
                 Category = model.Category?.Name ?? string.Empty,
-                MarkId = model.MarkId,
+                Brand = model.Brand?.Name ?? string.Empty,
             };
         }
     }
