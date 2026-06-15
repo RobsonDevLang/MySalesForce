@@ -23,9 +23,8 @@ public class UserModel
             }
         }
     
+    public required string Phone { get; set; }
     public required string PasswordHash { get; set; }
-    public DateTime CreateDate { get; set; } = DateTime.UtcNow;
-
     public int? DepartmentId { get; set; }
     public DepartmentModel? Department { get; set; }
 

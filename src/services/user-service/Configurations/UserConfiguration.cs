@@ -15,7 +15,7 @@ namespace User.Configurations
             builder.HasIndex(x => x.Email)
                 .IsUnique();
 
-            builder.Property(x => x.CreateDate)
+            builder.Property(x => x.CreatedDate)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP");
         }
         
