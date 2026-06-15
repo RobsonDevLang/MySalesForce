@@ -41,7 +41,7 @@ namespace Product.Repositories
                     Observation = p.Observation,
                     ShortName = p.ShortName,
                     ConditionalId = p.ConditionalId,
-                    MarkId = p.MarkId,
+                    Brand = p.Brand.Name,
                     Category = p.Category.Name,
                     Sizes = p.ProductSizes
                     .Select(ps => ps.Size.Size)

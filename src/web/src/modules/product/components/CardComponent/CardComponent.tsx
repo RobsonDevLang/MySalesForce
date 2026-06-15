@@ -15,12 +15,12 @@ export default function CardComponent({ categoriaAtiva }: CardComponentProps) {
     return <div>Loading...</div>;
   }
 
-const produtosFiltrados =
-  categoriaAtiva === "Todos"
-    ? products
-    : products.filter(
-        (p) => p.category?.toLowerCase() === categoriaAtiva.toLowerCase()
-      );
+  const produtosFiltrados =
+    categoriaAtiva === "Todos"
+      ? products
+      : products.filter(
+          (p) => p.category?.toLowerCase() === categoriaAtiva.toLowerCase(),
+        );
 
   return (
     <div className="box">

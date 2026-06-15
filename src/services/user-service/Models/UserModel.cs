@@ -8,10 +8,10 @@ public class UserModel
     {
 
     public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public string Surname { get; set; } = string.Empty;
+    public required string Name { get; set; } = string.Empty;
+    public required string Surname { get; set; } = string.Empty;
     private string _email = string.Empty;
-        public string Email
+        public required string Email
         {
             get => _email;
             set
@@ -23,16 +23,24 @@ public class UserModel
             }
         }
     
-    public string PasswordHash { get; set; } = string.Empty;
-    public int  Status { get; set; } = 1;
-    public DateTime CreateDate { get; set; } = DateTime.UtcNow;
-    public int? ManagerId { get; set; }
-    public int? PositionId { get; set; }
+    public required string Phone { get; set; }
+    public required string PasswordHash { get; set; }
     public int? DepartmentId { get; set; }
+    public DepartmentModel? Department { get; set; }
 
-    // public UserModel? Gerente { get; set; }
-    // public CargoModel? Cargo { get; set; }
-    // public DepartamentoModel? Departamento { get; set; }
+    public int? PositionId { get; set; }
+    public PositionModel? Position { get; set; }
+
+    public int? RoleId { get; set; }
+    public RoleModel? Role { get; set; }
+
+    public int? ManagerId { get; set; }
+    public UserModel? Manager { get; set; }
+    
+    public UserStatus Status { get; set; } = UserStatus.Active;
+    public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+    public DateTime UpdateDate { get; set; }
+    public DateTime? LastLoginDate { get; set; }
 
     }
 }

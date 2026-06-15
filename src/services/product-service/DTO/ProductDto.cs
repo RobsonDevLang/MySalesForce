@@ -17,7 +17,7 @@ namespace Product.DTO
         public string? ShortName {get; set;}
         public int ConditionalId {get; set;}
         public string Category { get; set; } = string.Empty;
-        public int MarkId {get; set;}
+        public string Brand {get; set;} = string.Empty;
         public List<string> Sizes { get; set; } = new();
         public List<ProductImageDto> Images { get; set; } = new();
         public List<ProductHistoricalPriceDto> HistoricalPrices { get; set; } = new();

@@ -4,6 +4,7 @@ export interface Product {
   shortName?: string;
   conditionalId: string;
   category: string;
+  brand: string;
   description: string;
   height: number;
   width: number;
@@ -18,13 +19,13 @@ export interface Product {
 }
 
 export interface Images {
- url: string; 
- mainImage: boolean
- altText: string;
- }
+  url?: string;
+  mainImage: boolean;
+  altText: string;
+}
 
 export interface HistoricalPrice {
-  price: number;
+  price?: number;
   startDate: string;
-  endDate: string;
+  endDate?: string;
 }

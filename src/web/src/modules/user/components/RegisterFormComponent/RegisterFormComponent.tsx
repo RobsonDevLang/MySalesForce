@@ -8,8 +8,11 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import { useUser } from "../../hooks/useUser";
 
 export default function RegisterFormComponent() {
+  const { form, handleChange, handleSubmit } = useUser();
+
   return (
     <>
       <div className="register-container">
@@ -20,19 +23,31 @@ export default function RegisterFormComponent() {
 
           <p className="subtitle">Preencha os dados abaixo para começar.</p>
 
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="row">
               <div className="input-group">
                 <div className="input-wrapper">
                   <PersonIcon className="input-icon" />
-                  <InputComponent type="text" placeholder="Nome" />
+                  <InputComponent
+                    type="text"
+                    name="name"
+                    placeholder="Nome"
+                    value={form.name}
+                    onChange={handleChange}
+                  />
                 </div>
               </div>
 
               <div className="input-group">
                 <div className="input-wrapper">
                   <PersonIcon className="input-icon" />
-                  <InputComponent type="text" placeholder="Sobrenome" />
+                  <InputComponent
+                    type="text"
+                    name="surname"
+                    placeholder="Sobrenome"
+                    value={form.surname}
+                    onChange={handleChange}
+                  />
                 </div>
               </div>
             </div>
@@ -40,21 +55,39 @@ export default function RegisterFormComponent() {
             <div className="input-group">
               <div className="input-wrapper">
                 <EmailIcon className="input-icon" />
-                <InputComponent type="email" placeholder="E-mail" />
+                <InputComponent
+                  type="email"
+                  name="email"
+                  placeholder="E-mail"
+                  value={form.email}
+                  onChange={handleChange}
+                />
               </div>
             </div>
 
             <div className="input-group">
               <div className="input-wrapper">
                 <LocalPhoneIcon className="input-icon" />
-                <InputComponent type="text" placeholder="Telefone" />
+                <InputComponent
+                  type="text"
+                  name="phone"
+                  placeholder="Telefone"
+                  value={form.phone}
+                  onChange={handleChange}
+                />
               </div>
             </div>
 
             <div className="input-group">
               <div className="input-wrapper">
                 <LockIcon className="input-icon" />
-                <InputComponent type="password" placeholder="Senha" />
+                <InputComponent
+                  type="password"
+                  name="password_hash"
+                  placeholder="Senha"
+                  value={form.password_hash}
+                  onChange={handleChange}
+                />
                 <VisibilityIcon className="visibility-icon" />
                 <VisibilityOffIcon className="visibility-icon" />
               </div>
