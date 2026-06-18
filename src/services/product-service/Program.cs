@@ -25,7 +25,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend", policy =>
     {
         policy
-            .SetIsOriginAllowed(_ => true )
+            .AllowAnyOrigin()
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -46,8 +46,8 @@ app.UseAuthorization();
 // Configure the HTTP request pipeline.
 // if (app.Environment.IsDevelopment())
 // {
-    app.UseSwagger();
-    app.UseSwaggerUI(); // Abre a UI na rota /swagger/index.html
+app.UseSwagger();
+app.UseSwaggerUI(); // Abre a UI na rota /swagger/index.html
 // }
 
 using (var scope = app.Services.CreateScope())
@@ -58,7 +58,10 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate();
 }
 
-// app.UseHttpsRedirection();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 app.MapControllers();
 
