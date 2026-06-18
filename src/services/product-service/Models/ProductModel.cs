@@ -21,7 +21,7 @@ namespace Product.Models
 // Foreing Keys
         public int ConditionalId {get; set;}
         public int CategoryId { get; set;}
-        public int BrandId {get; set;}
+        public int BrandId { get; set; }
 
 // Navigation Properties
         public BrandModel Brand { get; set; } = null!;
