@@ -461,3 +461,6 @@ Thumbs.db
 
 .fake
 *.lscache
+
+# Secret files
+SecretList.md

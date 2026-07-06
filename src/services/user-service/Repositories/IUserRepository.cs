@@ -8,5 +8,6 @@ namespace User.Repositories
         UserModel? GetById(int id);
         UserModel Add(UserModel user);
         void Update(UserModel user);
+        bool ExistsByEmail(string email);
     }
 }

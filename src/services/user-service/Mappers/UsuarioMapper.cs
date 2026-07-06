@@ -8,6 +8,8 @@ public static class UsuarioMapper
 {
     public static UserModel ParaModel(UserDto dto)
     {
+        ArgumentNullException.ThrowIfNull(dto);
+
         return new UserModel
         {
             Name = dto.Name,
@@ -25,6 +27,8 @@ public static class UsuarioMapper
 
     public static UserDto ForDto(UserModel model)
     {
+        ArgumentNullException.ThrowIfNull(model);
+
         return new UserDto
         {
             Name = model.Name,
