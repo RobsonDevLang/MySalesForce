@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { postUser } from "../services/user.service";
 import axios from "axios";
 
 export function useUser() {
@@ -28,8 +27,6 @@ export function useUser() {
     event.preventDefault();
 
     try {
-      const response = await postUser(form);
-
       setSeverity("success");
       setMessage("Usuário criado com sucesso.");
       setShowAlert(true);
