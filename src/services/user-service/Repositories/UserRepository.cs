@@ -40,5 +40,10 @@ namespace User.Repositories
             _context.AppUser.Update(user);
             _context.SaveChanges();
         }
+
+        public bool ExistsByEmail(string email)
+        {
+            return _context.AppUser.Any(x => x.Email == email);
+        }
     }
 }

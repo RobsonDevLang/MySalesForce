@@ -7,6 +7,7 @@ namespace Product.Repositories
     {
         IReadOnlyList<ProductModel> GetAll();
         IReadOnlyList<ProductDto> GetAllActive();
+        IReadOnlyList<ProductDto> GetAllActiveCategory(int CategoryId);
         ProductModel? GetById(int id);
         ProductModel Add(ProductModel product);
         void Update(ProductModel product);

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { postUser } from "../services/user.service";
+import axios from "axios";
 
 export function useUser() {
   const [form, setForm] = useState({
@@ -9,6 +9,12 @@ export function useUser() {
     phone: "",
     password_hash: "",
   });
+
+  const [message, setMessage] = useState("");
+  const [severity, setSeverity] = useState<
+    "success" | "info" | "warning" | "error"
+  >("info");
+  const [showAlert, setShowAlert] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setForm((prev) => ({
@@ -20,14 +26,33 @@ export function useUser() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    console.log("HANDLE SUBMIT CHAMADO");
-
     try {
-      const response = await postUser(form);
-
-      console.log("Usuário criado:", response);
+      setSeverity("success");
+      setMessage("Usuário criado com sucesso.");
+      setShowAlert(true);
     } catch (error) {
-      console.error("Erro ao criar usuário:", error);
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 400) {
+          setSeverity("warning");
+          setMessage("Dados inválidos.");
+        }
+
+        if (error.response?.status === 409) {
+          setSeverity("error");
+          setMessage("Usuário já existe.");
+        }
+
+        if (error.response?.status === 500) {
+          setSeverity("error");
+          setMessage("Erro interno do servidor.");
+        }
+
+        setShowAlert(true);
+      } else {
+        setSeverity("error");
+        setMessage(`Erro inesperado: ${String(error)}`);
+        setShowAlert(true);
+      }
     }
   }
 
@@ -35,5 +60,8 @@ export function useUser() {
     form,
     handleChange,
     handleSubmit,
+    message,
+    severity,
+    showAlert,
   };
 }

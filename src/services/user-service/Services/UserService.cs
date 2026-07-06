@@ -18,8 +18,15 @@ namespace User.Services
         public UserModel? GetById(int id) =>
             _repository.GetById(id);
 
-        public UserModel Add(UserModel user) =>
-            _repository.Add(user);
+        public UserModel Add(UserModel user)
+        {
+            var exists = _repository.ExistsByEmail(user.Email);
+
+            if (exists)
+                throw new InvalidOperationException("Usuário já existe.");
+
+            return _repository.Add(user);
+        }
 
         public void Update(UserModel user) =>
             _repository.Update(user);

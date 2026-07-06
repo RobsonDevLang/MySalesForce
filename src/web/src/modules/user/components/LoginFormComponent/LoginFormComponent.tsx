@@ -1,8 +1,6 @@
 import InputComponent from "@/shared/components/InputComponent/InputComponent";
-import "./RegisterFormComponent.css";
-import PersonIcon from "@mui/icons-material/Person";
+import "./LoginFormComponent.css";
 import EmailIcon from "@mui/icons-material/Email";
-import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import LockIcon from "@mui/icons-material/Lock";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -11,7 +9,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import { useUser } from "../../hooks/useUser";
 import Alert from "@mui/material/Alert";
 
-export default function RegisterFormComponent() {
+export default function LoginFormComponent() {
   const { form, handleChange, handleSubmit, message, severity, showAlert } =
     useUser();
 
@@ -21,39 +19,11 @@ export default function RegisterFormComponent() {
         <div className="register-card">
           <h1 className="logo">MySalesForce</h1>
 
-          <h2>Crie sua conta</h2>
+          <h2>Entrar</h2>
 
           <p className="subtitle">Preencha os dados abaixo para começar.</p>
 
           <form onSubmit={handleSubmit}>
-            <div className="row">
-              <div className="input-group">
-                <div className="input-wrapper">
-                  <PersonIcon className="input-icon" />
-                  <InputComponent
-                    type="text"
-                    name="name"
-                    placeholder="Nome"
-                    value={form.name}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-
-              <div className="input-group">
-                <div className="input-wrapper">
-                  <PersonIcon className="input-icon" />
-                  <InputComponent
-                    type="text"
-                    name="surname"
-                    placeholder="Sobrenome"
-                    value={form.surname}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-            </div>
-
             <div className="input-group">
               <div className="input-wrapper">
                 <EmailIcon className="input-icon" />
@@ -62,19 +32,6 @@ export default function RegisterFormComponent() {
                   name="email"
                   placeholder="E-mail"
                   value={form.email}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-
-            <div className="input-group">
-              <div className="input-wrapper">
-                <LocalPhoneIcon className="input-icon" />
-                <InputComponent
-                  type="text"
-                  name="phone"
-                  placeholder="Telefone"
-                  value={form.phone}
                   onChange={handleChange}
                 />
               </div>
@@ -95,32 +52,14 @@ export default function RegisterFormComponent() {
               </div>
             </div>
 
-            <div className="input-group">
-              <div className="input-wrapper">
-                <LockIcon className="input-icon" />
-                <InputComponent type="password" placeholder="Confirmar senha" />
-                <VisibilityIcon className="visibility-icon" />
-                <VisibilityOffIcon className="visibility-icon" />
-              </div>
-            </div>
-
-            <label className="terms">
-              <InputComponent type="checkbox" />
-              <span>
-                Eu concordo com os
-                <a href="#"> Termos de Uso </a>e
-                <a href="#"> Política de Privacidade</a>
-              </span>
-            </label>
-
             <button type="submit" className="btn-register">
-              Criar conta
+              Entrar
             </button>
           </form>
           {showAlert && <Alert severity={severity}>{message}</Alert>}
 
           <div className="divider">
-            <span>ou cadastre-se com</span>
+            <span>ou entre com</span>
           </div>
 
           <div className="social-buttons">
@@ -134,8 +73,8 @@ export default function RegisterFormComponent() {
           </div>
 
           <p className="login-link">
-            Já tem uma conta?
-            <a href="#"> Faça login</a>
+            Ainda não tem uma conta?
+            <a href="#"> Crie uma conta</a>
           </p>
         </div>
       </div>

@@ -11,14 +11,14 @@ namespace Product.Controller
 {
     [ApiController]
     [Route("product")]
-    public class ProductController: ControllerBase
+    public class ProductController : ControllerBase
     {
         private readonly IProductService _service;
         public ProductController(IProductService service)
         {
             _service = service;
         }
-        
+
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -31,20 +31,27 @@ namespace Product.Controller
             return Ok(_service.GetAllActive());
         }
 
+        // [HttpGet("active")]
+        // public IActionResult GetAllActive()
+        // {
+        //     return Ok(_service.GetAllActive());
+        // }
+
+
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-           var product = _service.GetById(id);
-           if (product == null) return NotFound();
-           return Ok(product);
+            var product = _service.GetById(id);
+            if (product == null) return NotFound();
+            return Ok(product);
         }
 
         [HttpPost]
         public IActionResult Create(ProductDto dto)
         {
-           var model = ProductMapper.ParaModel(dto);
-           var created = _service.Add(model);
-           return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+            var model = ProductMapper.ParaModel(dto);
+            var created = _service.Add(model);
+            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
     }
 }
