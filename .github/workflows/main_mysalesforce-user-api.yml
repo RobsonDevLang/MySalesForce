@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP.Net Core app to Azure Web App - my-sales-force
+name: Build and deploy ASP.Net Core app to Azure Web App - mysalesforce-user-api
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     permissions:
       contents: read
 
@@ -24,13 +24,13 @@ jobs:
           dotnet-version: "10.x"
 
       - name: Restore dependencies
-        run: dotnet restore src/services/product-service/Product.Service.csproj
+        run: dotnet restore src/services/user-service/User.Service.csproj
 
       - name: Build
-        run: dotnet build src/services/product-service/Product.Service.csproj --configuration Release --no-restore
+        run: dotnet build src/services/user-service/User.Service.csproj --configuration Release --no-restore
 
       - name: Publish
-        run: dotnet publish src/services/product-service/Product.Service.csproj --configuration Release --no-build --output "${{ env.DOTNET_ROOT }}/myapp"
+        run: dotnet publish src/services/user-service/User.Service.csproj --configuration Release --no-build --output "${{ env.DOTNET_ROOT }}/myapp"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -39,8 +39,11 @@ jobs:
           path: ${{ env.DOTNET_ROOT }}/myapp
 
   deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: build
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
       - name: Download artifact from build job
@@ -48,11 +51,17 @@ jobs:
         with:
           name: .net-app
 
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_3757EF1B6964483A97753874250CFC8F }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_A01D9CE0C80E43CF962B2320D83B3EE1 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_58A1FF78EBB642F5B4E361CF13FD6F58 }}
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: "my-sales-force"
+          app-name: "mysalesforce-user-api"
           slot-name: "Production"
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_04A93546312D4B4FBF8AD624FDF2AE83 }}
