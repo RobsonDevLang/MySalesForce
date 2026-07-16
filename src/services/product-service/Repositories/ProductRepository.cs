@@ -23,6 +23,19 @@ namespace Product.Repositories
                 .AsReadOnly();
         }
 
+        public IReadOnlyList<CategoryDto> GetCategory()
+        {
+            return _context.Category
+                .AsNoTracking()
+                .Select(c => new CategoryDto
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                })
+                .ToList()
+                .AsReadOnly();
+        }
+
         public IReadOnlyList<ProductDto> GetAllActive()
         {
             return _context.Product
@@ -68,6 +81,7 @@ namespace Product.Repositories
                 .ToList()
                 .AsReadOnly();
         }
+
         public IReadOnlyList<ProductDto> GetAllActiveCategory(int CategoryId)
         {
             return _context.Product

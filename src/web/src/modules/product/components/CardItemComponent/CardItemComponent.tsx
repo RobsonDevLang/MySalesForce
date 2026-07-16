@@ -57,8 +57,8 @@ export default function CardItemComponent({
 
         <img
           className="image"
-          src={product.images[0].url}
-          alt={product.images[0].altText}
+          src={product.images[0]?.url}
+          alt={product.images[0]?.altText}
         />
       </div>
       <div className="info">

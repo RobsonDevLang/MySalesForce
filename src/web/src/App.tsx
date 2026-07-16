@@ -3,20 +3,24 @@ import HeaderComponent from "./app/layouts/HeaderComponent/HeaderComponent";
 import CarrosselComponent from "./modules/product/components/CarouselComponent/CarouselComponent";
 import CategoriasComponent from "./shared/components/CategoryComponent/CategoryComponent";
 import CardComponent from "./modules/product/components/CardComponent/CardComponent";
-import { useState } from "react";
+import { useCategories } from "./modules/product/hooks/useCategories";
 
 function App() {
-  const [categoriaAtiva, setCategoriaAtiva] = useState("Todos");
-  
+  const { categorias, categoriaAtiva, setCategoriaAtiva } = useCategories();
+
   return (
     <>
       <HeaderComponent />
       <CategoriasComponent
-        categoriaAtiva={categoriaAtiva}
+        categorias={categorias}
+        categoriaAtiva={categoriaAtiva || { id: 0, name: "Nenhuma categoria" }}
         onCategoriaChange={setCategoriaAtiva}
       />
-      <CarrosselComponent/>
-      <CardComponent categoriaAtiva={categoriaAtiva} />
+      <CarrosselComponent />
+      <CardComponent
+        categoriaAtiva={categoriaAtiva?.name || "Nenhuma categoria"}
+        categoriaId={categoriaAtiva?.id || 0}
+      />
     </>
   );
 }

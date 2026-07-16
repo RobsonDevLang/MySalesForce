@@ -1,21 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { getProducts } from "../services/product.service";
-
 import type { Product } from "../types/product.types";
 
-export function useProducts() {
+export function useProducts(categoryId: number) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const cache = useRef<Record<number, Product[]>>({});
 
   useEffect(() => {
-    loadProducts();
-  }, []);
+    loadProducts(categoryId);
+  }, [categoryId]);
 
-  async function loadProducts() {
+  async function loadProducts(id: number) {
+    if (cache.current[id]) {
+      setProducts(cache.current[id]);
+      setLoading(false);
+      return;
+    }
+
     try {
       setLoading(true);
-      const data = await getProducts();
+
+      const data = await getProducts(id);
+
+      cache.current[id] = data;
       setProducts(data);
     } catch (error) {
       console.error("Erro ao buscar produtos:", error);

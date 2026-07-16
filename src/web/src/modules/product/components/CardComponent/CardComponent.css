@@ -78,6 +78,16 @@
   margin-bottom: 4px;
 }
 
+.loading-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 20rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+}
+
 @media (max-width: 1024px) {
   .container-card {
     grid-template-columns: repeat(3, 1fr);
@@ -103,26 +113,4 @@
   .custom-button.AddCar {
     padding: 0 0.6rem;
   }
-}
-
-.botao-carrinho {
-  background-color: #28a745; /* Cor verde para o botão */
-  color: white; /* Texto branco */
-  border: none;
-  padding: 12px 24px; /* Espaçamento interno */
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 5px; /* Bordas arredondadas */
-  cursor: pointer;
-  transition:
-    background-color 0.3s ease,
-    transform 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 10px; /* Espaço entre o ícone e o texto */
-}
-
-.botao-carrinho:hover {
-  background-color: #218838; /* Cor mais escura ao passar o mouse */
-  transform: translateY(-2px); /* Leve efeito de elevação */
 }

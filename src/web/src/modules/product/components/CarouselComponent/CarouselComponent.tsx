@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import "./CarouselComponent.css";
 import { useEffect } from "react";
 import ButtonComponent from "@/shared/components/ButtonComponent/ButtonComponent";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import flecha from "@/assets/flecha.png";
 
@@ -27,7 +28,8 @@ export default function CarrosselComponent() {
     }
   };
 
-  if (!product || !product.length) return <div>Loading...</div>;
+  if (!product || !product.length)
+    return <CircularProgress color="secondary" aria-label="Loading…" />;
 
   return (
     <>

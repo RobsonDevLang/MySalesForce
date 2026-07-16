@@ -1,38 +1,40 @@
 import "./CategoryComponent.css";
 
-interface CategoriasProps {
-  categoriaAtiva: string;
-  onCategoriaChange: (cat: string) => void;
+export interface Categoria {
+  id: number;
+  name: string;
 }
 
-function CategoryComponent({ categoriaAtiva, onCategoriaChange }: CategoriasProps) {
-  const categorias = [
-    "Todos",
-    "Feminino",
-    "Masculino",
-    "Inverno",
-    "Verão",
-    "Infantil",
-    "Acessórios",
-  ];
+interface CategoriasProps {
+  categorias: Categoria[];
+  categoriaAtiva: Categoria;
+  onCategoriaChange: (categoria: Categoria) => void;
+}
 
+function CategoryComponent({
+  categorias,
+  categoriaAtiva,
+  onCategoriaChange,
+}: CategoriasProps) {
   return (
     <>
-       <nav className="categorias-container">
-      <div className="catetegory-center">
-        <ul className="categorias-list">
-          {categorias.map((cat) => (
-            <li
-              key={cat}
-              className={`categoria-item ${categoriaAtiva === cat ? "active" : ""}`}
-              onClick={() => onCategoriaChange(cat)}
-            >
-              {cat}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </nav>
+      <nav className="categorias-container">
+        <div className="catetegory-center">
+          <ul className="categorias-list">
+            {categorias.map((cat) => (
+              <li
+                key={cat.id}
+                className={`categoria-item ${
+                  categoriaAtiva.id === cat.id ? "active" : ""
+                }`}
+                onClick={() => onCategoriaChange(cat)}
+              >
+                {cat.name}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
     </>
   );
 }
