@@ -16,6 +16,7 @@ namespace Product.Data
         public DbSet<ProductHistoricalPriceModel> HistoricalPrice { get; set; }
         public DbSet<ProductImageModel> ProductImage { get; set; }
         public DbSet<BrandModel> Brand { get; set; }
+        public DbSet<CategoryModel> Category { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductDbContext).Assembly);

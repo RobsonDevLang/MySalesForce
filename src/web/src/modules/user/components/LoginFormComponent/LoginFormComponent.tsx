@@ -10,8 +10,16 @@ import { useUser } from "../../hooks/useUser";
 import Alert from "@mui/material/Alert";
 
 export default function LoginFormComponent() {
-  const { form, handleChange, handleSubmit, message, severity, showAlert } =
-    useUser();
+  const {
+    loginForm,
+    handleChangeLogin,
+    handleSubmitLogin,
+    message,
+    severity,
+    showAlert,
+    showPassword,
+    setShowPassword,
+  } = useUser();
 
   return (
     <>
@@ -23,7 +31,7 @@ export default function LoginFormComponent() {
 
           <p className="subtitle">Preencha os dados abaixo para começar.</p>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmitLogin}>
             <div className="input-group">
               <div className="input-wrapper">
                 <EmailIcon className="input-icon" />
@@ -31,8 +39,8 @@ export default function LoginFormComponent() {
                   type="email"
                   name="email"
                   placeholder="E-mail"
-                  value={form.email}
-                  onChange={handleChange}
+                  value={loginForm.email}
+                  onChange={handleChangeLogin}
                 />
               </div>
             </div>
@@ -41,14 +49,23 @@ export default function LoginFormComponent() {
               <div className="input-wrapper">
                 <LockIcon className="input-icon" />
                 <InputComponent
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password_hash"
                   placeholder="Senha"
-                  value={form.password_hash}
-                  onChange={handleChange}
+                  value={loginForm.password_hash}
+                  onChange={handleChangeLogin}
                 />
-                <VisibilityIcon className="visibility-icon" />
-                <VisibilityOffIcon className="visibility-icon" />
+                {showPassword ? (
+                  <VisibilityOffIcon
+                    className="visibility-icon"
+                    onClick={() => setShowPassword(false)}
+                  />
+                ) : (
+                  <VisibilityIcon
+                    className="visibility-icon"
+                    onClick={() => setShowPassword(true)}
+                  />
+                )}
               </div>
             </div>
 

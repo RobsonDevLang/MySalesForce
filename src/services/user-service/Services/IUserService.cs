@@ -8,5 +8,7 @@ namespace User.Services
         UserModel? GetById(int id);
         UserModel Add(UserModel user);
         void Update(UserModel user);
+        UserModel? Login(string email, string password);
+        UserModel? GetByEmail(string email);
     }
 }

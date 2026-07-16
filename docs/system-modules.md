@@ -50,7 +50,7 @@ Responsável pelo controle de consentimento, tratamento de dados pessoais, gover
 
 ## Módulos futuros
 
-### 10. Brandeting
+### 10. Marketing
 
 Responsável por campanhas, segmentação de clientes, automações de comunicação e ações de relacionamento.
 

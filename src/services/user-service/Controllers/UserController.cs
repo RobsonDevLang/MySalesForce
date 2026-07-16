@@ -8,6 +8,7 @@ using System.Net.Mail;
 using Microsoft.AspNetCore.JsonPatch;
 using User.Data;
 using System.Data.Common;
+using BCrypt.Net;
 
 namespace User.Controllers
 {
@@ -17,10 +18,12 @@ namespace User.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _service;
+        private readonly IAuthService _authService;
 
-        public UserController(IUserService service)
+        public UserController(IUserService service, IAuthService authService)
         {
             _service = service;
+            _authService = authService;
         }
 
         [HttpGet]
@@ -43,12 +46,13 @@ namespace User.Controllers
             try
             {
                 var model = UsuarioMapper.ParaModel(dto);
+                model.PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.password_hash);
                 var created = _service.Add(model);
                 return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
             }
             catch (InvalidOperationException ex)
             {
-                return BadRequest(new { message = ex.Message });
+                return Conflict(new { message = ex.Message });
             }
             catch (Exception ex)
             {
@@ -80,6 +84,22 @@ namespace User.Controllers
             model.Id = id;
             _service.Update(model);
             return NoContent();
+        }
+
+        [HttpPost("login")]
+        public IActionResult Login(LoginDto dto)
+        {
+            var response = _authService.Login(dto);
+
+            if (response == null)
+            {
+                return Unauthorized(new
+                {
+                    message = "E-mail ou senha inválidos."
+                });
+            }
+
+            return Ok(response);
         }
     }
 }

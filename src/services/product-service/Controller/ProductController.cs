@@ -25,17 +25,23 @@ namespace Product.Controller
             return Ok(_service.GetAll());
         }
 
+        [HttpGet("category")]
+        public IActionResult GetCategory()
+        {
+            return Ok(_service.GetCategory());
+        }
+
         [HttpGet("active")]
         public IActionResult GetAllActive()
         {
             return Ok(_service.GetAllActive());
         }
 
-        // [HttpGet("active")]
-        // public IActionResult GetAllActive()
-        // {
-        //     return Ok(_service.GetAllActive());
-        // }
+        [HttpGet("active" + "/{CategoryId}")]
+        public IActionResult GetAllActiveCategory(int CategoryId)
+        {
+            return Ok(_service.GetAllActiveCategory(CategoryId));
+        }
 
 
         [HttpGet("{id}")]

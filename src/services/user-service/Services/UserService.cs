@@ -30,5 +30,26 @@ namespace User.Services
 
         public void Update(UserModel user) =>
             _repository.Update(user);
+
+        public UserModel? Login(string email, string password)
+        {
+            var user = _repository.GetByEmail(email);
+
+            if (user == null)
+                return null;
+
+            var passwordIsValid = BCrypt.Net.BCrypt.Verify(password, user.PasswordHash);
+
+            if (!passwordIsValid)
+                return null;
+
+            return user;
+        }
+
+        public UserModel? GetByEmail(string email)
+        {
+            return _repository.GetByEmail(email);
+        }
     }
+
 }

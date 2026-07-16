@@ -16,8 +16,12 @@ namespace Product.Services
         public IReadOnlyList<ProductModel> GetAll() =>
             _repository.GetAll();
 
+        public IReadOnlyList<CategoryDto> GetCategory() =>
+            _repository.GetCategory();
+
         public IReadOnlyList<ProductDto> GetAllActive() =>
             _repository.GetAllActive();
+
         public IReadOnlyList<ProductDto> GetAllActiveCategory(int CategoryId) =>
             _repository.GetAllActiveCategory(CategoryId);
 
