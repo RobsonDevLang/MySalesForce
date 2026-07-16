@@ -41,6 +41,12 @@ namespace User.Repositories
             _context.SaveChanges();
         }
 
+        public UserModel? GetByEmail(string email)
+        {
+            return _context.AppUser
+                .FirstOrDefault(x => x.Email == email);
+        }
+
         public bool ExistsByEmail(string email)
         {
             return _context.AppUser.Any(x => x.Email == email);

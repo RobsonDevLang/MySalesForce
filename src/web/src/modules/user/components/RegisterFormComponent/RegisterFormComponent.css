@@ -109,6 +109,11 @@ form {
   margin-top: 10px;
 }
 
+.btn-register:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .btn-register:hover {
   transform: translateY(-2px);
 

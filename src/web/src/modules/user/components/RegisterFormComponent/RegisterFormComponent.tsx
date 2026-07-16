@@ -12,8 +12,18 @@ import { useUser } from "../../hooks/useUser";
 import Alert from "@mui/material/Alert";
 
 export default function RegisterFormComponent() {
-  const { form, handleChange, handleSubmit, message, severity, showAlert } =
-    useUser();
+  const {
+    form,
+    handleChange,
+    handleSubmit,
+    message,
+    severity,
+    showAlert,
+    showPassword,
+    setShowPassword,
+    acceptedTerms,
+    setAcceptedTerms,
+  } = useUser();
 
   return (
     <>
@@ -84,28 +94,57 @@ export default function RegisterFormComponent() {
               <div className="input-wrapper">
                 <LockIcon className="input-icon" />
                 <InputComponent
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password_hash"
                   placeholder="Senha"
                   value={form.password_hash}
                   onChange={handleChange}
                 />
-                <VisibilityIcon className="visibility-icon" />
-                <VisibilityOffIcon className="visibility-icon" />
+                {showPassword ? (
+                  <VisibilityOffIcon
+                    className="visibility-icon"
+                    onClick={() => setShowPassword(false)}
+                  />
+                ) : (
+                  <VisibilityIcon
+                    className="visibility-icon"
+                    onClick={() => setShowPassword(true)}
+                  />
+                )}
               </div>
             </div>
 
             <div className="input-group">
               <div className="input-wrapper">
                 <LockIcon className="input-icon" />
-                <InputComponent type="password" placeholder="Confirmar senha" />
-                <VisibilityIcon className="visibility-icon" />
-                <VisibilityOffIcon className="visibility-icon" />
+                <InputComponent
+                  type={showPassword ? "text" : "password"}
+                  name="confirm_password"
+                  placeholder="Confirmar senha"
+                  value={form.confirm_password}
+                  onChange={handleChange}
+                />
+                {showPassword ? (
+                  <VisibilityOffIcon
+                    className="visibility-icon"
+                    onClick={() => setShowPassword(false)}
+                  />
+                ) : (
+                  <VisibilityIcon
+                    className="visibility-icon"
+                    onClick={() => setShowPassword(true)}
+                  />
+                )}
               </div>
             </div>
 
             <label className="terms">
-              <InputComponent type="checkbox" />
+              <InputComponent
+                type="checkbox"
+                name="acceptedTerms"
+                checked={acceptedTerms}
+                onChange={(e) => setAcceptedTerms(e.target.checked)}
+              />
               <span>
                 Eu concordo com os
                 <a href="#"> Termos de Uso </a>e
@@ -113,7 +152,11 @@ export default function RegisterFormComponent() {
               </span>
             </label>
 
-            <button type="submit" className="btn-register">
+            <button
+              type="submit"
+              className="btn-register"
+              disabled={!acceptedTerms}
+            >
               Criar conta
             </button>
           </form>

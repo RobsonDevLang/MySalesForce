@@ -3,30 +3,34 @@ import "./CardComponent.css";
 import CardItemComponent from "@/modules/product/components/CardItemComponent/CardItemComponent";
 import { useProducts } from "@/modules/product/hooks/useProduct";
 import { useFavorite } from "@/modules/product/hooks/useFavorite";
+import CircularProgress from "@mui/material/CircularProgress";
 
 interface CardComponentProps {
   categoriaAtiva: string;
+  categoriaId: number;
 }
 
-export default function CardComponent({ categoriaAtiva }: CardComponentProps) {
-  const { products } = useProducts();
+export default function CardComponent({ categoriaId }: CardComponentProps) {
+  const { products, loading } = useProducts(categoriaId);
   const { favorites, toggleFavorite, handleShare } = useFavorite();
-  if (!products.length) {
-    return <div>Loading...</div>;
-  }
 
-  const produtosFiltrados =
-    categoriaAtiva === "Todos"
-      ? products
-      : products.filter(
-          (p) => p.category?.toLowerCase() === categoriaAtiva.toLowerCase(),
-        );
+  if (loading) {
+    return (
+      <div className="box">
+        <div className="container-card">
+          <div className="card loading-card">
+            <CircularProgress color="secondary" aria-label="Loading…" />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="box">
       <div className="container-card">
-        {produtosFiltrados.length > 0 ? (
-          produtosFiltrados.map((product) => (
+        {products.length > 0 ? (
+          products.map((product) => (
             <CardItemComponent
               key={product.id}
               product={product}
