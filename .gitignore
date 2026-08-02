@@ -464,3 +464,9 @@ Thumbs.db
 
 # Secret files
 SecretList.md
+
+# Python / Venv
+.venv/
+__pycache__/
+*.pyc
+.env
